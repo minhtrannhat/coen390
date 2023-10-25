@@ -1,14 +1,14 @@
 
 
 // defines pins numbers
-const int trigPin = 9;
-const int echoPin = 10;
+const int trigPin = 12;
+const int echoPin = 14;
 // defines variables
 long duration;
 int distance;
 
 bool calibrationMode = false;
-bool occupied = false;
+bool spotStatus = false;
 
 int refValue = 0;
 int smallestCar = 80;
@@ -21,7 +21,7 @@ void setup() {
 }
 
 // calibrates refValue
-void() calibrate{
+void calibrate(){
 	
 	int upperBound = 390;
 	int lowerBound = 200;
@@ -68,23 +68,33 @@ int getMeasurement(){
 
 void loop() {
 	
-	if(calibrateMode == true && refValue == 0){
+  // intializes ref value
+	if(calibrationMode == true || refValue == 0){
 		calibrate();
 	}
 	distance = getMeasurement();
 	
 	if(refValue-distance <= refValue-smallestCar){
-		occupied = true;
+		spotStatus = false;
 	}
 	else{
-		occupied = false;
+		spotStatus = true;
 	}
 	
 	// ping server
 	
 	
-	// 5 seconds delay
-	delayMicroseconds(5000);
- 
+	// check statuses
+  Serial.println("Distance: ");
+  Serial.println(distance);
+  Serial.println("RefValue: ");
+  Serial.println(refValue);
+  Serial.println("State: ");
+  Serial.println(spotStatus);
+  Serial.println(" ");
+
+  // 5 seconds delay
+	delay(5000);
+  
 
 }

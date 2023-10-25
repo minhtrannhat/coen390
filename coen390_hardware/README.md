@@ -30,3 +30,9 @@ Example:
 In the code the pin 12 on the board is used for the Trig, and pin 14 for the Echo.
 
 For more information go to this [page](https://howtomechatronics.com/tutorials/arduino/ultrasonic-sensor-hc-sr04/).
+
+### Code
+
+When starting the program wait a few seconds for the device to adjust its reference value ( no more than 5). 
+
+Then you can move the sensor and compare the results. The `refValue` returns the obtained reference value during calibration,  the `distance` variable from the terminal returs the currently obtained value,the final value returns 1 or 0 ( true or false) for if the spot is taken of free. 

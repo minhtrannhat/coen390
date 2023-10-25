@@ -17,15 +17,16 @@
 The Ultra Sound sensor has four pins that need to be connected to the board `GND`,`Echo`,`Trig`,`Vcc`. 
 - The `GND` is for the ground and needs to be connected to the same port on the board. A `black` cable should be used.
 - The `Vcc` is the voltage and should be connected to the voltage port on the board indicated either by `Vcc` or `5V` / `3.3V`. It is recommended to use the `5V` option if it is available. A `red` or `white` cable should be used here.
-- For the rest any of the numbered pins need to be used, however make sure that the number of the pins is the same in the code. Use different cables to differentiate. 
+- For the `Echo`,`Trig` , any of the numbered pins need to be used, however make sure that the number of the pins is the same in the code. Use different cables to differentiate. 
 Example:
 
-  ```
-  // defines pins numbers
-const int trigPin = 12;
-const int echoPin = 14;
+ ```
+  // trig pin names
+  const int trigPin = 12;
+  const int echoPin = 14;
 
-  ```
+```
+
 In the code the pin 12 on the board is used for the Trig, and pin 14 for the Echo.
 
 For more information go to this [page](https://howtomechatronics.com/tutorials/arduino/ultrasonic-sensor-hc-sr04/).

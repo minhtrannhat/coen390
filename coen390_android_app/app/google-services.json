@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "31424869924",
+    "firebase_url": "https://test-hw-project-86ca6-default-rtdb.firebaseio.com",
+    "project_id": "test-hw-project-86ca6",
+    "storage_bucket": "test-hw-project-86ca6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31424869924:android:3be0a89c7163deeb7c4ab1",
+        "android_client_info": {
+          "package_name": "com.example.coen390_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASyKlLKvXuV84E84b7B7DDKmJ1WTJvItY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

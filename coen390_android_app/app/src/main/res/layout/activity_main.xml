@@ -1,112 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
+    android:gravity="center"
+    android:orientation="vertical"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#fff4d2"
+
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#71cd89"
-        android:padding="10dp"
-        tools:ignore="MissingConstraints" >
+    <TextView
+        android:id="@+id/textViewDistance"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="30dp"
+        android:textSize="30sp"
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Park N Go"
+        android:text="Distance: " />
 
-            android:textColor="#FFFFFF"
-            android:textSize="40sp"
-            tools:ignore="MissingConstraints" />
-    </FrameLayout>
+    <TextView
+        android:id="@+id/textViewSpotStatus"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:textSize="30sp"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:text="Spot Status: " />
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="15dp"
-        android:src="@mipmap/ic_launcher"
-        /> <!-- to change to logo -->
-
-
-        <FrameLayout
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background"
-            android:padding="10dp"
-            tools:ignore="MissingConstraints">
-
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/username_prompt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Username:"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    tools:ignore="MissingConstraints" />
-
-                <EditText
-                    android:id="@+id/username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="enter username"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:id="@+id/password_prompt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Password:"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    tools:ignore="MissingConstraints" />
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="enter password"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-        </FrameLayout>
-
-        <Button
-            android:id="@+id/btnEventB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textSize="20sp"
-            android:text="login"
-            android:drawableRight="@drawable/ic_right_arrow"
-            android:layout_marginTop="70dp"/>
-
-
-
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

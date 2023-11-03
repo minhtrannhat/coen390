@@ -29,24 +29,83 @@ FirebaseConfig config;
 
 //======================================== Millis variable to send/store data to firebase database.
 unsigned long sendDataPrevMillis = 0;
-const long sendDataIntervalMillis = 10000;  //--> Sends/stores data to firebase database every 10 seconds.
+const long sendDataIntervalMillis = 5000;  //--> Sends/stores data to firebase database every 5 seconds.
 //========================================
 
 // Boolean variable for sign in status.
 bool signupOK = false;
 
-float store_random_Float_Val;
-int store_random_Int_Val;
-uint number_of_uploads;
+// defines pins numbers
+const int trigPin = 12;
+const int echoPin = 14;
+
+// defines variables
+long duration;
+int distance;
+
+bool calibrationMode = false;
+bool spotStatus = false;
+
+int refValue = 0;
+int smallestCar = 80;
+
+// calibrates refValue
+void calibrate() {
+
+  int upperBound = 390;
+  int lowerBound = 200;
+  //stores obtained variables
+  int arr[15] = {};
+  int var = 0;
+  int n_values = 0;
+  // repeats measurments 15 times
+  for (int i = 0; i < 15; i++) {
+    var = getMeasurement();
+    if (var >= lowerBound && var <= upperBound) {
+      arr[i] = var;
+      n_values++;
+    }
+    delayMicroseconds(1000);
+  }
+
+  int average = 0;
+  // gets average from array
+  for (int i = 0; i < 15; i++) {
+    average += arr[i];
+  }
+
+  // checks if average value will be 0 and sets a default average
+  if (average <= 0) {
+    average = 200;
+  } else {
+    average = average / n_values;
+  }
+
+  refValue = average;
+}
+
+// gets measurments from sensor
+int getMeasurement() {
+  // Clears the trigPin
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin on HIGH state for 10 micro seconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin, HIGH);
+  // Calculating the distance
+  return duration * 0.034 / 2;
+}
+
 
 void setup() {
-  // put your setup code here, to run once:
-  number_of_uploads = 0;
-
   Serial.begin(115200);
   Serial.println();
 
-  pinMode(On_Board_LED, OUTPUT);
+  pinMode(trigPin, OUTPUT);  // Sets the trigPin as an Output
+  pinMode(echoPin, INPUT);   // Sets the echoPin as an Input
 
   //---------------------------------------- The process of connecting the WiFi on the ESP32 to the WiFi Router/Hotspot.
   WiFi.mode(WIFI_STA);
@@ -54,13 +113,9 @@ void setup() {
   Serial.println("---------------Connection");
   Serial.print("Connecting to : ");
   Serial.println(WIFI_SSID);
-  while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
 
-    digitalWrite(On_Board_LED, HIGH);
-    delay(250);
-    digitalWrite(On_Board_LED, LOW);
-    delay(250);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.println("connecting...");
   }
   digitalWrite(On_Board_LED, LOW);
   Serial.println();
@@ -92,46 +147,35 @@ void setup() {
 
   Firebase.begin(&config, &auth);
   Firebase.reconnectWiFi(true);
+
+  if (calibrationMode == true || refValue == 0) {
+    calibrate();
+    Serial.println("Finished Calibration.");
+  }
 }
 
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
-  if (number_of_uploads == 5) {
-    Serial.println("Uploaded 5 times, will cease to run.");
-    return;
-  }
-
-
   if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > sendDataIntervalMillis || sendDataPrevMillis == 0)) {
     sendDataPrevMillis = millis();
 
-    //---------------------------------------- Generate random values.
-    int randNumber = random(15, 40);
-    float f = (float)randNumber / 1.01;
-    int i = (int(f * 100));
-    store_random_Float_Val = float(i) / 100;
-    store_random_Int_Val = random(10, 99);
-    //----------------------------------------
+    distance = getMeasurement();
 
-    //----------------------------------------
-    Serial.println();
-    Serial.println("---------------Random Value");
-    Serial.print("Random Float_Val : ");
-    Serial.println(store_random_Float_Val);
-    Serial.print("Random Int_Val   : ");
-    Serial.println(store_random_Int_Val);
-    Serial.println("---------------");
-    //----------------------------------------
-
+    if (refValue - distance <= refValue - smallestCar) {
+      spotStatus = false;
+    } else {
+      spotStatus = true;
+    }
     //---------------------------------------- The process of sending/storing data to the firebase database.
     Serial.println();
     Serial.println("---------------Store Data");
-    digitalWrite(On_Board_LED, HIGH);
 
-    // Write an Int number on the database path test/random_Float_Val.
-    if (Firebase.RTDB.setFloat(&fbdo, "Test/random_Float_Val", store_random_Float_Val)) {
+    Serial.println("Current Distance:");
+    Serial.println(distance);
+    Serial.println("Current Status:");
+    Serial.println(spotStatus);
+
+    if (Firebase.RTDB.setFloat(&fbdo, "Test/Distance", distance)) {
       Serial.println("PASSED");
       Serial.println("PATH: " + fbdo.dataPath());
       Serial.println("TYPE: " + fbdo.dataType());
@@ -140,8 +184,7 @@ void loop() {
       Serial.println("REASON: " + fbdo.errorReason());
     }
 
-    // Write an Float number on the database path test/random_Int_Val.
-    if (Firebase.RTDB.setInt(&fbdo, "Test/random_Int_Val", store_random_Int_Val)) {
+    if (Firebase.RTDB.setInt(&fbdo, "Test/spotStatus", spotStatus)) {
       Serial.println("PASSED");
       Serial.println("PATH: " + fbdo.dataPath());
       Serial.println("TYPE: " + fbdo.dataType());
@@ -149,10 +192,11 @@ void loop() {
       Serial.println("FAILED");
       Serial.println("REASON: " + fbdo.errorReason());
     }
-
-    digitalWrite(On_Board_LED, LOW);
+    
+    Serial.println();
+    Serial.println("RefValue: ");
+    Serial.println(refValue);
     Serial.println("---------------");
     //----------------------------------------
-    number_of_uploads++;
   }
 }

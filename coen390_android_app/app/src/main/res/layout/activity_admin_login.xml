@@ -6,7 +6,8 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 android:background="#fff4d2"
-tools:context=".AdminLogin">
+tools:context=".AdminLogin"
+    tools:ignore="MissingClass">
 
 <FrameLayout
     android:layout_width="match_parent"
@@ -25,7 +26,7 @@ tools:context=".AdminLogin">
 
         android:textColor="#FFFFFF"
         android:textSize="40sp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingClass,MissingConstraints" />
 </FrameLayout>
 
 <LinearLayout

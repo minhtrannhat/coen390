@@ -4,18 +4,39 @@ package com.example.coen390_app;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.ListView;
 
 public class UserHomescreen extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_homescreen);
+
+        /*
+
+        FrameLayout frameLayout = findViewById(R.id.profile_frame);
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { Open_UserMapInterface();
+
+            }
+        }); */
+
+
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,11 +52,11 @@ public class UserHomescreen extends AppCompatActivity {
      final Button cancelButton = findViewById(R.id.cancelButton);
 */
 
+    }
 
-
-
-
-
+    private void Open_UserMapInterface() {
+        Intent intent = new Intent(this, UserMapInterface.class );
+        startActivity(intent);
     }
 
     @Override

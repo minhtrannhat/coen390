@@ -14,9 +14,9 @@ public class AdminHomeScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_admin_home_screen);
 
-        button = (Button) findViewById(R.id.button);
+        button = findViewById(R.id.to_form_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

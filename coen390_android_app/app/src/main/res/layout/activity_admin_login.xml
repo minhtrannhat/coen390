@@ -40,7 +40,7 @@ tools:context=".AdminLogin"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="15dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/parkngo_logo_ver2"
         /> <!-- to change to logo -->
 
 

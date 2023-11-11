@@ -12,7 +12,7 @@
         android:id="@+id/logo"
         android:layout_width="80dp"
         android:layout_height="50dp"
-        android:src="@drawable/parkngo_logo"
+        android:src="@drawable/parkngo_logo_ver2"
         android:layout_gravity="start"
         android:paddingStart="0dp"
         android:paddingEnd="0dp"

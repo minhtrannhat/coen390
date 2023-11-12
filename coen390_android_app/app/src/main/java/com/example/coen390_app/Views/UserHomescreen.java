@@ -38,21 +38,20 @@ public class UserHomescreen extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         dbHelper = new ParkingLotProfileFirebaseHelper();
-
-        recyclerView =findViewById(R.id.parking_lot_profile_list);
-
-        dbHelper.test();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        recyclerView =findViewById(R.id.parking_lot_profile_list);
         dbHelper.getParkingLotProfiles(new ParkingLotProfileFirebaseHelper.OnDataLoadedListener() {
             @Override
             public void onDataLoaded(List<ParkingLotProfile> parkingLotProfiles) {
                 // Handle the loaded data
                 // This block of code is executed after the data is loaded
+                dbHelper.setCurrentOccupancy(parkingLotProfiles.get(0).current_occupancy);
+
                 parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles);
 
                 // Set an OnClickListener on the RecyclerView items

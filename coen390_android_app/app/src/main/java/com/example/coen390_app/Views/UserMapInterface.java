@@ -17,14 +17,15 @@ import com.ortiz.touchview.TouchImageView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class UserMapInterface extends AppCompatActivity {
 
     protected FrameLayout frameLayout;
 
     protected ParkingLotProfileFirebaseHelper dbHelper;
 
-    protected DatabaseReference dbRef;
+    protected DatabaseReference occupancyListDbRef;
+
+    protected DatabaseReference currentOccupancyDbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class UserMapInterface extends AppCompatActivity {
 
         dbHelper = new ParkingLotProfileFirebaseHelper();
 
-        dbRef = dbHelper.getFirebaseDatabase()
+        occupancyListDbRef = dbHelper.getParkingLotProfilesDbRef()
                 .getDatabase()
                 .getReference()
                 .child("Test")
@@ -42,7 +43,7 @@ public class UserMapInterface extends AppCompatActivity {
                 .child("occupancy")
                 .child("firstFloor");
 
-        dbRef.addValueEventListener(new ValueEventListener() {
+        occupancyListDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<String> occupiedSpots = new ArrayList<>();
@@ -56,6 +57,7 @@ public class UserMapInterface extends AppCompatActivity {
 
                 Log.d("UserMapInterface", "displayImage: occupiedSpots = " + occupiedSpots);
                 displayImage(occupiedSpots);
+                dbHelper.setCurrentOccupancy(occupiedSpots.size());
             }
 
             @Override

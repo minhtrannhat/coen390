@@ -18,14 +18,31 @@ import java.util.List;
 
 public class ParkingLotProfileFirebaseHelper {
 
-    protected DatabaseReference firebaseDatabase;
+    protected DatabaseReference parkingLotProfilesDbRef;
+
+    protected DatabaseReference currentOccupancyDbRef;
+
     public ParkingLotProfileFirebaseHelper() {
-        firebaseDatabase = FirebaseDatabase.getInstance("https://test-hw-project-86ca6-default-rtdb.firebaseio.com").getReference().child("Test").child("lots");
+        parkingLotProfilesDbRef = FirebaseDatabase.getInstance("https://test-hw-project-86ca6-default-rtdb.firebaseio.com").getReference().child("Test").child("lots");
     }
+
+    public void setCurrentOccupancy(int currentOccupancy) {
+        currentOccupancyDbRef = parkingLotProfilesDbRef
+                .getDatabase()
+                .getReference()
+                .child("Test")
+                .child("lots")
+                .child("Lb_building")
+                .child("current_occupancy");
+
+        currentOccupancyDbRef.setValue(currentOccupancy);
+        Log.d("ParkingLotProfileFirebaseHelper", "updateCurrentOccupancy: Updated current occupancy " + currentOccupancy);
+    }
+
     public void getParkingLotProfiles(final OnDataLoadedListener listener) {
         final List<ParkingLotProfile> parkingLotProfiles = new ArrayList<>();
 
-        firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        parkingLotProfilesDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot lotSnapshot : dataSnapshot.getChildren()) {
@@ -52,37 +69,27 @@ public class ParkingLotProfileFirebaseHelper {
         });
     }
 
-    public DatabaseReference getFirebaseDatabase() {
-        return firebaseDatabase;
+    public DatabaseReference getParkingLotProfilesDbRef() {
+        return parkingLotProfilesDbRef;
     }
 
-    public void setFirebaseDatabase(DatabaseReference firebaseDatabase) {
-        this.firebaseDatabase = firebaseDatabase;
-    }
-
-    // Define an interface to handle the callback
-    public interface OnDataLoadedListener {
-        void onDataLoaded(List<ParkingLotProfile> parkingLotProfiles);
-        void onDataError(String errorMessage);
-    }
-
-    public void test(){
+    public void test() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(); // Reference to the root node
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String jsonData = dataSnapshot.getValue().toString();
 
                 if (dataSnapshot.getValue() != null) {
                     try {
-                    // Prettify JSON using Gson
-                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    String prettifiedJson = gson.toJson(gson.fromJson(jsonData, Object.class));
+                        // Prettify JSON using Gson
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        String prettifiedJson = gson.toJson(gson.fromJson(jsonData, Object.class));
 
-                    Log.d("ParkingLotProfileFirebaseHelper", "onDataChange: " + prettifiedJson);
-                } catch (com.google.gson.JsonSyntaxException error){
+                        Log.d("ParkingLotProfileFirebaseHelper", "onDataChange: " + prettifiedJson);
+                    } catch (com.google.gson.JsonSyntaxException error) {
                         Log.d("ParkingLotProfileFirebaseHelper", "onDataChange: " + jsonData);
                     }
                 }
@@ -93,5 +100,12 @@ public class ParkingLotProfileFirebaseHelper {
                 Log.e("ParkingLotProfileFirebaseHelper", "onCancelled: " + databaseError.getMessage());
             }
         });
+    }
+
+    // Define an interface to handle the callback
+    public interface OnDataLoadedListener {
+        void onDataLoaded(List<ParkingLotProfile> parkingLotProfiles);
+
+        void onDataError(String errorMessage);
     }
 }

@@ -13,19 +13,19 @@
         android:theme="@style/Theme.Coen390_app"
         tools:targetApi="31"><!-- label set to blank to hide title in toolbar -->
         <activity
-            android:name=".AdminForm"
+            android:name=".Views.AdminForm"
             android:exported="false" />
         <activity
-            android:name=".AdminLogin"
+            android:name=".Views.AdminLogin"
             android:exported="false" />
         <activity
-            android:name=".AdminHomeScreen"
+            android:name=".Views.AdminHomeScreen"
             android:exported="false" />
         <activity
-            android:name=".UserMapInterface"
+            android:name=".Views.UserMapInterface"
             android:exported="false" />
         <activity
-            android:name=".UserHomescreen"
+            android:name=".Views.UserHomescreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

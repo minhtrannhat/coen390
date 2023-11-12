@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff4d2"
     android:orientation="vertical"
-    tools:context=".AdminForm">
+    tools:context=".Views.AdminForm">
 
     <include
         layout="@layout/toolbar"

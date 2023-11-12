@@ -1,6 +1,6 @@
 {
   "lots": {
-    "1": {
+    "Lb_building": {
       "name": "LB Building",
       "address": "1400 Maisonneuve Blvd W",
       "city": "Montreal",
@@ -12,7 +12,7 @@
       "current_occupancy": 0,
       "max_occupancy": 10,
       "occupancy": {
-        "1": ["A1", "A2"]
+        "firstFloor": ["A1", "A2"]
       },
       "map_size": "small"
     }

@@ -1,4 +1,4 @@
-package com.example.coen390_app;
+package com.example.coen390_app.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.coen390_app.R;
 
 import java.security.acl.Owner;
 

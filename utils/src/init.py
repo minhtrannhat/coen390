@@ -27,7 +27,7 @@ ref.set(init_data_content)
 
 print(f"Updated database values: {ref.get()}\n\n")
 
-# # comment out everything below here to not reset the database
+# # uncomment everything below here to reset the database
 # dummy_data_content = {"Distance": 18, "spotStatus": True}
 
 # ref.set(dummy_data_content)

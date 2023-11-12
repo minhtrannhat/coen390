@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff4d2"
     android:orientation="vertical"
-    tools:context=".UserHomescreen">
+    tools:context=".Views.UserHomescreen">
 
     <include
         layout="@layout/toolbar"
@@ -34,7 +34,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerEventList"
+            android:id="@+id/parking_lot_profile_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
@@ -43,6 +43,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/user_parking_lot_profile"
             tools:ignore="MissingClass" />
+
 
     </LinearLayout>
 

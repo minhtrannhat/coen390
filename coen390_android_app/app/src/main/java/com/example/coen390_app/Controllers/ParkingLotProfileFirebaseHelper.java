@@ -52,6 +52,14 @@ public class ParkingLotProfileFirebaseHelper {
         });
     }
 
+    public DatabaseReference getFirebaseDatabase() {
+        return firebaseDatabase;
+    }
+
+    public void setFirebaseDatabase(DatabaseReference firebaseDatabase) {
+        this.firebaseDatabase = firebaseDatabase;
+    }
+
     // Define an interface to handle the callback
     public interface OnDataLoadedListener {
         void onDataLoaded(List<ParkingLotProfile> parkingLotProfiles);

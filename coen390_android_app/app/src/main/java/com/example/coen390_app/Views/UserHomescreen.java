@@ -44,39 +44,7 @@ public class UserHomescreen extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        recyclerView =findViewById(R.id.parking_lot_profile_list);
-        dbHelper.getParkingLotProfiles(new ParkingLotProfileFirebaseHelper.OnDataLoadedListener() {
-            @Override
-            public void onDataLoaded(List<ParkingLotProfile> parkingLotProfiles) {
-                // Handle the loaded data
-                // This block of code is executed after the data is loaded
-                dbHelper.setCurrentOccupancy(parkingLotProfiles.get(0).current_occupancy);
-
-                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles);
-
-                // Set an OnClickListener on the RecyclerView items
-                parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick() {
-                        // Handle item click, e.g., launch UserMapInterface activity
-                        Open_UserMapInterface();
-                    }
-                });
-
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                recyclerView.setAdapter(parkingLotAdapter);
-
-
-                Log.d("Userhomescreen", "onStart: Current parkingLotList size " + parkingLotProfiles.size());
-            }
-
-            @Override
-            public void onDataError(String errorMessage) {
-                // Handle the error
-                Log.e("UserHomeScreen", "onDataError: " + errorMessage);
-            }
-        });
-
+        buildRecyclerView();
     }
 
     private void Open_UserMapInterface() {
@@ -112,9 +80,48 @@ public class UserHomescreen extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.refresh_homescreen){
+            buildRecyclerView();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
+    private void buildRecyclerView(){
+        recyclerView =findViewById(R.id.parking_lot_profile_list);
+        dbHelper.getParkingLotProfiles(new ParkingLotProfileFirebaseHelper.OnDataLoadedListener() {
+            @Override
+            public void onDataLoaded(List<ParkingLotProfile> parkingLotProfiles) {
+                // Handle the loaded data
+                // This block of code is executed after the data is loaded
+                dbHelper.setCurrentOccupancy(parkingLotProfiles.get(0).current_occupancy);
+
+                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles);
+
+                // Set an OnClickListener on the RecyclerView items
+                parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick() {
+                        // Handle item click, e.g., launch UserMapInterface activity
+                        Open_UserMapInterface();
+                    }
+                });
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerView.setAdapter(parkingLotAdapter);
+
+
+                Log.d("Userhomescreen", "onStart: Current parkingLotList size " + parkingLotProfiles.size());
+            }
+
+            @Override
+            public void onDataError(String errorMessage) {
+                // Handle the error
+                Log.e("UserHomeScreen", "onDataError: " + errorMessage);
+            }
+        });
+    }
 }
 
 

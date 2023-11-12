@@ -47,6 +47,7 @@ public class UserHomescreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         dbHelper.getParkingLotProfiles(new ParkingLotProfileFirebaseHelper.OnDataLoadedListener() {
             @Override
             public void onDataLoaded(List<ParkingLotProfile> parkingLotProfiles) {
@@ -54,8 +55,18 @@ public class UserHomescreen extends AppCompatActivity {
                 // This block of code is executed after the data is loaded
                 parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles);
 
+                // Set an OnClickListener on the RecyclerView items
+                parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick() {
+                        // Handle item click, e.g., launch UserMapInterface activity
+                        Open_UserMapInterface();
+                    }
+                });
+
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(parkingLotAdapter);
+
 
                 Log.d("Userhomescreen", "onStart: Current parkingLotList size " + parkingLotProfiles.size());
             }

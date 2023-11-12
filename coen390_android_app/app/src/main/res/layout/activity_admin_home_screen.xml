@@ -23,11 +23,26 @@
 
 
         <TextView
+            android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Home Screen" />
+            android:layout_marginTop="20dp"
+            android:text="Profiles: "
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:paddingBottom="0dp"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/parking_lot_profile_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/user_parking_lot_profile"
+            tools:ignore="MissingClass" />
 
         <Button
             android:id="@+id/to_form_button"

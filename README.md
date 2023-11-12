@@ -24,10 +24,10 @@
       "postal_code": "H3G 1M8",
       "lot_owner": "Bob DeBuilder",
       "owner_tel": "5148482424",
-      "floor_total": "1",
-      "placed_occupancy": "2",
-      "current_occupancy": "0",
-      "max_occupancy": "10",
+      "floor_total": 1,
+      "placed_occupancy": 2,
+      "current_occupancy": 0,
+      "max_occupancy": 10,
       "occupancy": {
         "1": ["A1", "A2"]
       },

@@ -44,10 +44,12 @@ long duration;
 int distance;
 
 bool calibrationMode = false;
-bool spotStatus = false;
+bool spotStatusCurrent = false;
+bool spotStatusOld = false;
 
 int refValue = 0;
 int smallestCar = 80;
+String fullPath;
 
 // calibrates refValue
 void calibrate() {
@@ -152,6 +154,8 @@ void setup() {
     calibrate();
     Serial.println("Finished Calibration.");
   }
+
+  fullPath = String(FB_PATH) + String(SPOT);
 }
 
 
@@ -162,9 +166,9 @@ void loop() {
     distance = getMeasurement();
 
     if (refValue - distance <= refValue - smallestCar) {
-      spotStatus = false;
+      spotStatusCurrent = false;
     } else {
-      spotStatus = true;
+      spotStatusCurrent = true;
     }
     //---------------------------------------- The process of sending/storing data to the firebase database.
     Serial.println();
@@ -173,26 +177,23 @@ void loop() {
     Serial.println("Current Distance:");
     Serial.println(distance);
     Serial.println("Current Status:");
-    Serial.println(spotStatus);
+    Serial.println(spotStatusCurrent);
 
-    if (Firebase.RTDB.setFloat(&fbdo, "Test/Distance", distance)) {
-      Serial.println("PASSED");
-      Serial.println("PATH: " + fbdo.dataPath());
-      Serial.println("TYPE: " + fbdo.dataType());
-    } else {
-      Serial.println("FAILED");
-      Serial.println("REASON: " + fbdo.errorReason());
+    // only upload data if it changes
+    if (spotStatusCurrent != spotStatusOld) {
+
+      if (Firebase.RTDB.setBool(&fbdo, F(fullPath.c_str()), spotStatusCurrent)) {
+        Serial.println("PASSED");
+        Serial.println("PATH: " + fbdo.dataPath());
+        Serial.println("TYPE: " + fbdo.dataType());
+      } else {
+        Serial.println("FAILED");
+        Serial.println("REASON: " + fbdo.errorReason());
+      }
+
+      spotStatusOld = spotStatusCurrent;
     }
 
-    if (Firebase.RTDB.setInt(&fbdo, "Test/spotStatus", spotStatus)) {
-      Serial.println("PASSED");
-      Serial.println("PATH: " + fbdo.dataPath());
-      Serial.println("TYPE: " + fbdo.dataType());
-    } else {
-      Serial.println("FAILED");
-      Serial.println("REASON: " + fbdo.errorReason());
-    }
-    
     Serial.println();
     Serial.println("RefValue: ");
     Serial.println(refValue);

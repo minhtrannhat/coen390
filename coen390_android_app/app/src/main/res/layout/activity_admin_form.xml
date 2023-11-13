@@ -1,23 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminForm">
+    android:background="#fff4d2"
+    android:orientation="vertical"
+    tools:context=".Views.AdminForm">
 
-    <ListView
+    <include
+        layout="@layout/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview" />
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Form Page Screen"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp">
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/profileTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile Settings"
+                android:textColor="#000000"
+                android:layout_marginBottom="25dp"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/lotName_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parking Lot Profile Name:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/lotName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter profile name"
+                android:inputType="text"
+                android:maxLength="20"
+                android:layout_marginBottom="15dp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/address_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter address"
+                android:inputType="text"
+                android:maxLength="20"
+                android:layout_marginBottom="15dp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/postalCode_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Postal Code:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/postalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter postal code"
+                android:inputType="text"
+                android:maxLength="20"
+                android:layout_marginBottom="15dp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/city_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter city"
+                android:inputType="text"
+                android:maxLength="20"
+                android:layout_marginBottom="15dp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/country_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Country:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter country"
+                android:inputType="text"
+                android:maxLength="20"
+                android:layout_marginBottom="15dp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/owner_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parking Lot Owner:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/owner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter parking lot owner"
+                android:inputType="text"
+                android:maxLength="20"
+                android:layout_marginBottom="15dp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/ownerTel_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tel. Number:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/ownerTel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter telephone number"
+                android:inputType="text"
+                android:maxLength="20"
+                android:layout_marginBottom="15dp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/ownerEmail_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/ownerEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter email"
+                android:inputType="text"
+                android:maxLength="20"
+                android:layout_marginBottom="15dp"
+                android:textColor="#FFFFFF" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="50dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="20sp"
+                    android:layout_marginRight="70dp"
+                    android:backgroundTint="#ff675f"
+                    android:text="cancel"
+                    android:visibility="gone"/>
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="20sp"
+                    android:backgroundTint="#71cd89"
+                    android:text="login"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

@@ -1,20 +1,3 @@
-# COEN390 Team 7 Project: Parking Spot Sensor
-
-## Directories
-
-- `coen390_android_app`: Android app for users' parking needs.
-- `coen390_hardware`: Arduino project files for ESP32 hardware and CAD files.
-
-## Firebase's Firestore dev tools
-
-- `cd utils`
-- Make sure you have python3 installed
-- Install the Pip dependencies with `pip install -r requirements.txt`
-- Run the init data script `python3 src/init.py`
-
-### Basic schema
-
-```json
 {
   "lots": {
     "Lb_building": {
@@ -45,4 +28,3 @@
     }
   }
 }
-```

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/menu/toolbar_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/refresh_homescreen"
+        android:icon="@drawable/ic_menu_refresh"
+        android:title="Refresh"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_edit"
+        android:title="Edit"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_adminLogin"
+        android:title="Login"
+        app:showAsAction="never" />
+
+    <!-- add more items as needed -->
+</menu>

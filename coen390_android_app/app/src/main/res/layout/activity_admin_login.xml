@@ -6,7 +6,8 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 android:background="#fff4d2"
-tools:context=".AdminLogin">
+tools:context=".Views.AdminLogin"
+    tools:ignore="MissingClass">
 
 <FrameLayout
     android:layout_width="match_parent"
@@ -25,7 +26,7 @@ tools:context=".AdminLogin">
 
         android:textColor="#FFFFFF"
         android:textSize="40sp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingClass,MissingConstraints" />
 </FrameLayout>
 
 <LinearLayout
@@ -39,7 +40,7 @@ tools:context=".AdminLogin">
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="15dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/parkngo_logo_ver2"
         /> <!-- to change to logo -->
 
 
@@ -95,7 +96,7 @@ tools:context=".AdminLogin">
     </FrameLayout>
 
     <Button
-        android:id="@+id/btnEventB"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

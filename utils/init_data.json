@@ -12,7 +12,10 @@
       "current_occupancy": 1,
       "max_occupancy": 10,
       "occupancy": {
-        "firstFloor": ["A1", "A2"]
+        "firstFloor": {
+          "A1": true,
+          "A2": false
+        }
       },
       "map_size": "small"
     }

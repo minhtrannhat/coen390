@@ -17,7 +17,7 @@
 ```json
 {
   "lots": {
-    "1": {
+    "Lb_building": {
       "name": "LB Building",
       "address": "1400 Maisonneuve Blvd W",
       "city": "Montreal",
@@ -26,10 +26,13 @@
       "owner_tel": "5148482424",
       "floor_total": 1,
       "placed_occupancy": 2,
-      "current_occupancy": 0,
+      "current_occupancy": 1,
       "max_occupancy": 10,
       "occupancy": {
-        "1": ["A1", "A2"]
+        "firstFloor": {
+          "A1": true,
+          "A2": false
+        }
       },
       "map_size": "small"
     }

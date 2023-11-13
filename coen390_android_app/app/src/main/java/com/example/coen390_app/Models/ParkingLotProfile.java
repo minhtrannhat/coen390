@@ -20,7 +20,7 @@ public class ParkingLotProfile {
     public int placed_occupancy;
     public String postal_code;
 
-    public ParkingLotProfile(String address, String city, int current_occupancy, int floor_total, String lot_owner, String map_size, int max_occupancy, String name, String owner_tel, int placed_occupancy, String postal_code, Map<String, List<String>> occupancy) {
+    public ParkingLotProfile(String address, String city, int current_occupancy, int floor_total, String lot_owner, String map_size, int max_occupancy, String name, String owner_tel, int placed_occupancy, String postal_code, Map<String, Map<String, Boolean>> occupancy) {
         this.address = address;
         this.city = city;
         this.current_occupancy = current_occupancy;
@@ -35,15 +35,15 @@ public class ParkingLotProfile {
         this.occupancy = occupancy;
     }
 
-    public Map<String, List<String>> getOccupancy() {
+    public Map<String, Map<String, Boolean>> getOccupancy() {
         return occupancy;
     }
 
-    public void setOccupancy(Map<String, List<String>> occupancy) {
+    public void setOccupancy(Map<String, Map<String, Boolean>> occupancy) {
         this.occupancy = occupancy;
     }
 
-    public Map<String, List<String>> occupancy;
+    public Map<String, Map<String, Boolean>> occupancy;
 
     public ParkingLotProfile() {
     }

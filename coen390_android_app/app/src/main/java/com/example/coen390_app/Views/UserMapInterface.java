@@ -16,7 +16,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.ortiz.touchview.TouchImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 public class UserMapInterface extends AppCompatActivity {
 
     protected FrameLayout frameLayout;
@@ -40,18 +43,30 @@ public class UserMapInterface extends AppCompatActivity {
                 .child("Test")
                 .child("lots")
                 .child("Lb_building")
-                .child("occupancy")
-                .child("firstFloor");
+                .child("occupancy");
 
         occupancyListDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // Assuming you have retrieved the data from Firebase and stored it in occupancyMap
+                HashMap<String, HashMap<String, Boolean>> occupancyMap = (HashMap<String, HashMap<String, Boolean>>) dataSnapshot.getValue();
                 List<String> occupiedSpots = new ArrayList<>();
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String occupiedSpot = snapshot.getValue(String.class);
-                    if (occupiedSpot != null) {
-                        occupiedSpots.add(occupiedSpot);
+                for (Map.Entry<String, HashMap<String, Boolean>> floorEntry : occupancyMap.entrySet()) {
+                    String floor = floorEntry.getKey();
+                    HashMap<String, Boolean> spotStatusMap = floorEntry.getValue();
+
+                    // Now, you can iterate through the spotStatusMap for each floor
+                    for (Map.Entry<String, Boolean> spotEntry : spotStatusMap.entrySet()) {
+                        String spot = spotEntry.getKey();
+                        boolean status = spotEntry.getValue();
+
+                        if (status){
+                            occupiedSpots.add(spot);
+                        }
+
+                        Log.d("UserMapInterface", "onDataChange: " + "Floor: " + floor + ", Spot: " + spot + ", Status: " + status);
                     }
                 }
 

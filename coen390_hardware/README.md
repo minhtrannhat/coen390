@@ -33,6 +33,9 @@
     #define API_KEY ""      // Firebase web API key
     #define DATABASE_URL "" // Real-time Firestore URL
 
+    #define FB_PATH "Test/lots/Lb_building/occupancy/firstFloor/"
+    #define SPOT "A1" // the spot, usually A1 and A2
+
     #endif
   ```
 

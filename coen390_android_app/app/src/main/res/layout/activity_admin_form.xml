@@ -189,22 +189,22 @@
 
                 <Button
                     android:id="@+id/cancel_button"
-                    android:layout_width="110dp"
+                    android:layout_width="115dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textSize="20sp"
                     android:layout_marginRight="70dp"
                     android:backgroundTint="#ff675f"
-                    android:text="cancel"
+                    android:text="Cancel"
                     android:visibility="gone"/>
                 <Button
                     android:id="@+id/save_button"
-                    android:layout_width="110dp"
+                    android:layout_width="115dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textSize="20sp"
                     android:backgroundTint="#71cd89"
-                    android:text="login"
+                    android:text="Save"
                     android:visibility="gone"/>
 
             </LinearLayout>

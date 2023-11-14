@@ -44,15 +44,6 @@
             tools:listitem="@layout/user_parking_lot_profile"
             tools:ignore="MissingClass" />
 
-        <Button
-            android:id="@+id/to_form_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Go to Form Page"
-
-            />
-
     </LinearLayout>
 
 </LinearLayout>

@@ -9,11 +9,11 @@
       "owner_tel": "5148482424",
       "floor_total": 1,
       "placed_occupancy": 2,
-      "current_occupancy": 1,
+      "current_occupancy": 0,
       "max_occupancy": 10,
       "occupancy": {
         "firstFloor": {
-          "A1": true,
+          "A1": false,
           "A2": false
         }
       },
@@ -22,7 +22,7 @@
   },
   "admins": {
     "Bob": {
-      "email": "b_debui@live.concordia.com",
+      "username": "admin",
       "password": "123456",
       "lots": ["1"]
     }

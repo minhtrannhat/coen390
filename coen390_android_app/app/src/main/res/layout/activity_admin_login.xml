@@ -69,7 +69,8 @@ tools:context=".Views.AdminLogin"
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="enter username"
+                android:hint="Enter Username"
+                android:autofillHints="username"
                 android:inputType="text"
                 android:maxLength="20"
                 android:textColor="#FFFFFF" />
@@ -88,8 +89,9 @@ tools:context=".Views.AdminLogin"
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="enter password"
-                android:inputType="text"
+                android:hint="Enter Password"
+                android:autofillHints="password"
+                android:inputType="textPassword"
                 android:maxLength="20"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
@@ -104,9 +106,6 @@ tools:context=".Views.AdminLogin"
         android:text="login"
         android:drawableRight="@drawable/ic_right_arrow"
         android:layout_marginTop="70dp"/>
-
-
-
 
 </LinearLayout>
 

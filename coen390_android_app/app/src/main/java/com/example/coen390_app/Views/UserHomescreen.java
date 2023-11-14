@@ -19,7 +19,9 @@ import com.example.coen390_app.Controllers.ParkingLotProfileFirebaseHelper;
 import com.example.coen390_app.Models.ParkingLotProfile;
 import com.example.coen390_app.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class UserHomescreen extends AppCompatActivity {
@@ -95,7 +97,27 @@ public class UserHomescreen extends AppCompatActivity {
             public void onDataLoaded(List<ParkingLotProfile> parkingLotProfiles) {
                 // Handle the loaded data
                 // This block of code is executed after the data is loaded
-                dbHelper.setCurrentOccupancy(parkingLotProfiles.get(0).current_occupancy);
+                Map<String, Map<String, Boolean>> occupancyMap = parkingLotProfiles.get(0).occupancy;
+                List<String> occupiedSpots = new ArrayList<>();
+
+                for (Map.Entry<String, Map<String, Boolean>> floorEntry : occupancyMap.entrySet()) {
+                    String floor = floorEntry.getKey();
+                    Map<String, Boolean> spotStatusMap = floorEntry.getValue();
+
+                    // Now, you can iterate through the spotStatusMap for each floor
+                    for (Map.Entry<String, Boolean> spotEntry : spotStatusMap.entrySet()) {
+                        String spot = spotEntry.getKey();
+                        boolean status = spotEntry.getValue();
+
+                        if (status){
+                            occupiedSpots.add(spot);
+                        }
+
+                        Log.d("UserHomeScreen", "onDataChange: " + "Floor: " + floor + ", Spot: " + spot + ", Status: " + status);
+                    }
+                }
+
+                dbHelper.setCurrentOccupancy(occupiedSpots.size());
 
                 parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles);
 

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.view.View;
 
@@ -30,6 +31,9 @@ public class UserHomescreen extends AppCompatActivity {
 
     private ParkingLotProfileFirebaseHelper dbHelper;
 
+    private Button btnCancel, btnSave;
+    private boolean isEditMode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,26 @@ public class UserHomescreen extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         dbHelper = new ParkingLotProfileFirebaseHelper();
+
+        btnCancel = findViewById(R.id.cancel_button);
+        btnSave = findViewById(R.id.save_button);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isEditMode = !isEditMode;
+                toggleEditMode(isEditMode);
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isEditMode = !isEditMode;
+                toggleEditMode(isEditMode);
+            }
+        });
+
     }
 
     @Override
@@ -65,8 +89,8 @@ public class UserHomescreen extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_edit) {
-            // Handle the "Settings" menu item click
-            // You can perform an action here
+            isEditMode = !isEditMode;
+           toggleEditMode(isEditMode);
             return true;
         }
 
@@ -88,6 +112,11 @@ public class UserHomescreen extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void toggleEditMode(boolean isEdit) {
+        btnSave.setVisibility(isEdit ? View.VISIBLE : View.GONE);
+        btnCancel.setVisibility(isEdit ? View.VISIBLE : View.GONE);
     }
 
     private void buildRecyclerView(){

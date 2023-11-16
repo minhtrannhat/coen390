@@ -7,13 +7,14 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:label="coen390"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Coen390_app"
         tools:targetApi="31"><!-- label set to blank to hide title in toolbar -->
         <activity
             android:name=".Views.AdminForm"
+            android:label=""
             android:exported="false" />
         <activity
             android:name=".Views.AdminLogin"
@@ -26,6 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".Views.UserHomescreen"
+            android:label=""
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

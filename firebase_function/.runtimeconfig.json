@@ -1,0 +1,7 @@
+{
+  "firebase": {
+    "projectId": "test-hw-project-86ca6",
+    "databaseURL": "https://test-hw-project-86ca6-default-rtdb.firebaseio.com",
+    "storageBucket": "test-hw-project-86ca6.appspot.com"
+  }
+}

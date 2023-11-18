@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class UserHomescreen extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -41,7 +42,7 @@ public class UserHomescreen extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         dbHelper = new ParkingLotProfileFirebaseHelper();
 
@@ -64,6 +65,24 @@ public class UserHomescreen extends AppCompatActivity {
             }
         });
 
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        String token = task.getResult();
+                        Log.d("UserHomeScreen", "FCM Token: " + token);
+                    } else {
+                        Log.e("UserHomeScreen", "Failed to obtain FCM Token", task.getException());
+                    }
+                });
+
+        FirebaseMessaging.getInstance().subscribeToTopic("occupancy_alert")
+                .addOnCompleteListener(task -> {
+                    String message = "Subscribed to occupancy_alert topic!";
+                    if (!task.isSuccessful()) {
+                        message = "Subscription to occupancy_alert topic failed";
+                    }
+                    Log.d("UserHomeScreen", message);
+                });
     }
 
     @Override

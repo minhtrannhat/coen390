@@ -5,6 +5,12 @@
 - `coen390_android_app`: Android app for users' parking needs.
 - `coen390_hardware`: Arduino project files for ESP32 hardware and CAD files.
 
+## Notification Test
+
+- Go the firebase realtime database console from your browser.
+- Manually change the spot status A1 and A2 so that they are both `true`.
+- You should get a new notification, regardless of whether or not the app is running, in the background or not running at all.
+
 ## Firebase's Firestore dev tools
 
 - `cd utils`
@@ -26,11 +32,11 @@
       "owner_tel": "5148482424",
       "floor_total": 1,
       "placed_occupancy": 2,
-      "current_occupancy": 1,
+      "current_occupancy": 0,
       "max_occupancy": 10,
       "occupancy": {
         "firstFloor": {
-          "A1": true,
+          "A1": false,
           "A2": false
         }
       },
@@ -39,7 +45,7 @@
   },
   "admins": {
     "Bob": {
-      "email": "b_debui@live.concordia.com",
+      "username": "admin",
       "password": "123456",
       "lots": ["1"]
     }

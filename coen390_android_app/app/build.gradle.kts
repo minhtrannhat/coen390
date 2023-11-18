@@ -41,6 +41,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
     implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-messaging")
     implementation("com.github.MikeOrtiz:TouchImageView:3.6")
     implementation("com.google.code.gson:gson:2.10.1")
 }

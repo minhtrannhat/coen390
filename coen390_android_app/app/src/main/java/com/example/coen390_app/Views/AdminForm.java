@@ -1,8 +1,12 @@
 package com.example.coen390_app.Views;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.coen390_app.Controllers.ParkingLotProfileFirebaseHelper;
 import com.example.coen390_app.R;
 
 import java.security.acl.Owner;
@@ -19,11 +24,11 @@ public class AdminForm extends AppCompatActivity {
 
     private EditText lotName, address, postalCode, city, country, owner, ownerTel, ownerEmail;
 
-    private Button cancelButton, saveButton;
+    private Button cancelButton, saveButton, editButton;
 
     private boolean isEditMode = false;
 
-
+    private ParkingLotProfileFirebaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,9 @@ public class AdminForm extends AppCompatActivity {
         //initialize toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        dbHelper = new ParkingLotProfileFirebaseHelper();
 
         lotName = findViewById(R.id.lotName);
         address = findViewById(R.id.address);
@@ -64,8 +72,43 @@ public class AdminForm extends AppCompatActivity {
             }
         });
 
-        toggleEditMode(true); //display mode on default
+        toggleEditMode(false); //display mode on default
 
+
+
+
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+
+        //hide search, refresh and login button in menu
+        MenuItem searchButton = menu.findItem(R.id.action_search);
+        MenuItem refreshButton = menu.findItem(R.id.refresh_homescreen);
+        MenuItem loginButton = menu.findItem(R.id.action_adminLogin);
+
+        searchButton.setEnabled(false);
+        refreshButton.setEnabled(false);
+        loginButton.setEnabled(false);
+
+        searchButton.setVisible(false);
+        refreshButton.setVisible(false);
+        loginButton.setVisible(false);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.action_edit){
+            isEditMode = !isEditMode;
+            toggleEditMode(isEditMode);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void toggleEditMode(boolean isEdit) {
@@ -90,7 +133,14 @@ public class AdminForm extends AppCompatActivity {
     }
 
     private void loadProfileInfo() {
-        //pull data from firebase
+        // Retrieve values from firebase
+
+
+
+
+        // Populate EditText fields with saved values
+
+
     }
 
     private boolean validatePrefences(){

@@ -1,7 +1,6 @@
 package com.example.coen390_app.Views;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
@@ -9,10 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.coen390_app.Controllers.ParkingLotProfileFirebaseHelper;
@@ -25,14 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.security.acl.Owner;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class AdminForm extends AppCompatActivity {
 
-    private EditText lotName, address, postalCode, city, country, owner, ownerTel, ownerEmail;
+    private EditText lotName, address, postalCode, city, province, country, owner, ownerTel, ownerEmail;
 
     private Button cancelButton, saveButton, editButton;
 
@@ -56,6 +52,7 @@ public class AdminForm extends AppCompatActivity {
         address = findViewById(R.id.address);
         postalCode = findViewById(R.id.postalCode);
         city = findViewById(R.id.city);
+        province = findViewById(R.id.province);
         country = findViewById(R.id.country);
         owner = findViewById(R.id.owner);
         ownerTel = findViewById(R.id.ownerTel);
@@ -76,7 +73,7 @@ public class AdminForm extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validatePrefences()){
+                if(validatePreferences()){
                     toggleEditMode(false);
                     Toast.makeText(AdminForm.this, "Save Successfully", Toast.LENGTH_SHORT).show();
                 }
@@ -143,6 +140,7 @@ public class AdminForm extends AppCompatActivity {
         address.setEnabled(isEdit);
         postalCode.setEnabled(isEdit);
         city.setEnabled(isEdit);
+        province.setEnabled(isEdit);
         country.setEnabled(isEdit);
         owner.setEnabled(isEdit);
         ownerTel.setEnabled(isEdit);
@@ -168,18 +166,22 @@ public class AdminForm extends AppCompatActivity {
                     String addressFB = dataSnapshot.child("address").getValue(String.class);
                     String postalCodeFB = dataSnapshot.child("postal_code").getValue(String.class);
                     String cityFB = dataSnapshot.child("city").getValue(String.class);
-                    //String countryFB = dataSnapshot.child("country").getValue(String.class);
+                    String provinceFB = dataSnapshot.child("province").getValue(String.class);
+                    String countryFB = dataSnapshot.child("country").getValue(String.class);
                     String ownerFB = dataSnapshot.child("lot_owner").getValue(String.class);
                     String ownerTelFB = dataSnapshot.child("owner_tel").getValue(String.class);
+                    String ownerEmailFB = dataSnapshot.child("owner_email").getValue(String.class);
 
                     //set textView
                     lotName.setText(lotNameFB);
                     address.setText(addressFB);
                     postalCode.setText(postalCodeFB);
                     city.setText(cityFB);
-                    //country.setText(countryFB);
+                    province.setText(provinceFB);
+                    country.setText(countryFB);
                     owner.setText(ownerFB);
                     ownerTel.setText(ownerTelFB);
+                    ownerEmail.setText(ownerEmailFB);
 
                 }
             }
@@ -192,25 +194,81 @@ public class AdminForm extends AppCompatActivity {
 
     }
 
-    private boolean validatePrefences(){
+    private boolean validatePreferences(){
         //lotName, address, postalCode, city, country, owner, ownerTel, ownerEmail;
         String stringLotName = lotName.getText().toString().trim();
         String stringAddress = address.getText().toString().trim();
         String stringPostalCode = postalCode.getText().toString().trim();
         String stringCity = city.getText().toString().trim();
+        String stringProvince = province.getText().toString().trim();
         String stringCountry = country.getText().toString().trim();
         String stringOwner = owner.getText().toString().trim();
         String stringOwnerTel = ownerTel.getText().toString().trim();
         String stringOwnerEmail = ownerEmail.getText().toString().trim();
 
-        /*
-        if(stringLotName.isEmpty() || stringAddress.isEmpty() || stringPostalCode.isEmpty() || stringCity.isEmpty() || stringCountry.isEmpty() || stringOwner.isEmpty() || stringOwnerTel.isEmpty() || stringOwnerEmail.isEmpty()){
-            showToast("Button names cannot be empty.");
+
+        //fields cannot be empty
+
+        if(stringLotName.isEmpty() ||
+                stringAddress.isEmpty() ||
+                stringPostalCode.isEmpty() ||
+                stringCity.isEmpty() ||
+                stringProvince.isEmpty() ||
+                stringCountry.isEmpty() ||
+                stringOwner.isEmpty() ||
+                stringOwnerTel.isEmpty() ||
+                stringOwnerEmail.isEmpty()){
+            showToast("Please fill all fields.");
             return false; //empty fields
         }
-        */
+
         //other validation criterias
 
+        //string patterns
+        String alphanumerics = "^[a-zA-Z0-9\\s.-]{1,30}$";
+        String alphabet = "^[a-zA-Z\\s-]{1,35}$";
+        String telNumber = "^[0-9\\s]{1,20}$";
+        //String telNumberSanitized = "^[0-9\\s]{1,20}$";
+        String postalCode = "^[a-zA-Z0-9\\s]{1,7}$";
+        String email = "^[a-zA-Z0-9\\s@._-]{1,35}$";
+
+        //data validation
+        if( !stringLotName.matches(alphanumerics)){
+            showToast("Invalid Parking lot name.");
+            return false;
+        }
+        if( !stringAddress.matches(alphanumerics)){
+            showToast("Invalid address.");
+            return false;
+        }
+        if( !stringPostalCode.matches(postalCode)){
+            showToast("Invalid Postal Code.");
+            return false;
+        }
+        if( !stringCity.matches(alphabet)){
+            showToast("Invalid city name.");
+            return false;
+        }
+        if( !stringProvince.matches(alphabet)){
+            showToast("Invalid province name.");
+            return false;
+        }
+        if( !stringCountry.matches(alphabet)){
+            showToast("Invalid country name.");
+            return false;
+        }
+        if( !stringOwner.matches(alphabet)){
+            showToast("Invalid owner name.");
+            return false;
+        }
+        if( !stringOwnerTel.matches(telNumber)){
+            showToast("Invalid telephone number.");
+            return false;
+        }
+        if( !stringOwnerEmail.matches(email)){
+            showToast("Invalid email.");
+            return false;
+        }
 
 
 
@@ -226,13 +284,15 @@ public class AdminForm extends AppCompatActivity {
                 .child("Lb_building");
 
         Map<String, Object> updates = new HashMap<>();
-        updates.put("lotName", stringLotName);
+        updates.put("name", stringLotName);
         updates.put("address", stringAddress);
-        updates.put("postalCode", stringPostalCode);
+        updates.put("postal_code", stringPostalCode);
         updates.put("city", stringCity);
-        //updates.put("country", "New Country");
-        updates.put("owner", stringOwner);
-        updates.put("ownerTel", stringOwnerTel);
+        updates.put("province", stringProvince);
+        updates.put("country", stringCountry);
+        updates.put("lot_owner", stringOwner);
+        updates.put("owner_tel", stringOwnerTel);
+        updates.put("owner_email", stringOwnerEmail);
 
         // Update the values in Firebase
         databaseReference.updateChildren(updates)

@@ -28,8 +28,9 @@
             android:layout_marginTop="20dp"
             android:paddingBottom="0dp"
             android:text="Profiles: "
-            android:textColor="#000000"
+            android:textColor="#0E0E0E"
             android:textSize="20sp"
+            android:fontFamily="@font/kdamthmorproregular"
             tools:ignore="MissingConstraints" />
 
 

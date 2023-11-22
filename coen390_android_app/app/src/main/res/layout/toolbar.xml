@@ -21,11 +21,15 @@
         android:contentDescription="Icon"/>
 
     <TextView
+        android:id="@+id/colour"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:fontFamily="@font/kdamthmorproregular"
         android:paddingTop="10dp"
-        android:textSize="35dp"
-        android:text="Park-N-Go" />
+        android:text="Park-N-Go"
+        android:textColor="#0E0E0E"
+        android:textSize="30dp" />
+
 
 
 

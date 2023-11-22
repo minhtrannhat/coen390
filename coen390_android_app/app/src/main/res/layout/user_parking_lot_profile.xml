@@ -30,16 +30,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Parking Lot Profile"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp" />
+                    android:textColor="#0E0E0E"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/kdamthmorproregular"/>
 
                 <TextView
                     android:id="@+id/profile_addr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1550 Blvd. De Maisonneuve West"
-                    android:textColor="#D3D3D3"
-                    android:textSize="15sp" />
+                    android:textColor="#7E0C03"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/kdamthmorproregular"/>
 
 
             </LinearLayout>
@@ -50,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:text="0/20"
                 android:textColor="#FFFFFF"
-                android:textSize="35sp" />
+                android:textSize="30sp"
+                android:fontFamily="@font/kdamthmorproregular"/>
         </LinearLayout>
 
 

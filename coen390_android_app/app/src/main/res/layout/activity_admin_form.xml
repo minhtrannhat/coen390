@@ -52,7 +52,7 @@
                 android:inputType="text"
                 android:maxLength="20"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/address_prompt"
@@ -70,7 +70,7 @@
                 android:inputType="text"
                 android:maxLength="20"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/postalCode_prompt"
@@ -88,7 +88,7 @@
                 android:inputType="text"
                 android:maxLength="20"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/city_prompt"
@@ -106,7 +106,7 @@
                 android:inputType="text"
                 android:maxLength="20"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/country_prompt"
@@ -124,7 +124,7 @@
                 android:inputType="text"
                 android:maxLength="20"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/owner_prompt"
@@ -142,7 +142,7 @@
                 android:inputType="text"
                 android:maxLength="20"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/ownerTel_prompt"
@@ -160,7 +160,7 @@
                 android:inputType="text"
                 android:maxLength="20"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/ownerEmail_prompt"
@@ -178,7 +178,7 @@
                 android:inputType="text"
                 android:maxLength="20"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <LinearLayout
                 android:layout_width="match_parent"

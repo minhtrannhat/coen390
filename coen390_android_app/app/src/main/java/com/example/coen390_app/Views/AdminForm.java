@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,11 @@ import android.widget.Toast;
 
 import com.example.coen390_app.Controllers.ParkingLotProfileFirebaseHelper;
 import com.example.coen390_app.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.security.acl.Owner;
 
@@ -133,7 +139,45 @@ public class AdminForm extends AppCompatActivity {
     }
 
     private void loadProfileInfo() {
-        // Retrieve values from firebase
+
+        DatabaseReference databaseReference = FirebaseDatabase
+                .getInstance("https://test-hw-project-86ca6-default-rtdb.firebaseio.com")
+                .getReference().child("Test")
+                .child("lots")
+                .child("Lb_building");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+
+                    // Retrieve values from firebase
+                    String lotNameFB = dataSnapshot.child("name").getValue(String.class);
+                    String addressFB = dataSnapshot.child("address").getValue(String.class);
+                    String postalCodeFB = dataSnapshot.child("postal_code").getValue(String.class);
+                    String cityFB = dataSnapshot.child("city").getValue(String.class);
+                    //String countryFB = dataSnapshot.child("country").getValue(String.class);
+                    String ownerFB = dataSnapshot.child("lot_owner").getValue(String.class);
+                    String ownerTelFB = dataSnapshot.child("owner_tel").getValue(String.class);
+
+                    //set textView
+                    lotName.setText(lotNameFB);
+                    address.setText(addressFB);
+                    postalCode.setText(postalCodeFB);
+                    city.setText(cityFB);
+                    //country.setText(countryFB);
+                    owner.setText(ownerFB);
+                    ownerTel.setText(ownerTelFB);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
 

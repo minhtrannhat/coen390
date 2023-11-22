@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.coen390_app.Controllers.ParkingLotProfileFirebaseHelper;
 import com.example.coen390_app.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.security.acl.Owner;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AdminForm extends AppCompatActivity {
@@ -72,6 +76,14 @@ public class AdminForm extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(validatePrefences()){
+                    toggleEditMode(false);
+                    Toast.makeText(AdminForm.this, "Save Successfully", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(AdminForm.this, "Invalid input. Please check.", Toast.LENGTH_SHORT).show();
+                }
+
                 //validate all fields have been filled
                 //good > toggle display mode
                 //fail > toast msg
@@ -178,13 +190,6 @@ public class AdminForm extends AppCompatActivity {
             }
         });
 
-
-
-
-
-        // Populate EditText fields with saved values
-
-
     }
 
     private boolean validatePrefences(){
@@ -198,16 +203,54 @@ public class AdminForm extends AppCompatActivity {
         String stringOwnerTel = ownerTel.getText().toString().trim();
         String stringOwnerEmail = ownerEmail.getText().toString().trim();
 
-
+        /*
         if(stringLotName.isEmpty() || stringAddress.isEmpty() || stringPostalCode.isEmpty() || stringCity.isEmpty() || stringCountry.isEmpty() || stringOwner.isEmpty() || stringOwnerTel.isEmpty() || stringOwnerEmail.isEmpty()){
             showToast("Button names cannot be empty.");
             return false; //empty fields
         }
-
+        */
         //other validation criterias
 
 
+
+
+
+
+
         //function to send to firebase
+
+        DatabaseReference databaseReference = FirebaseDatabase
+                .getInstance("https://test-hw-project-86ca6-default-rtdb.firebaseio.com")
+                .getReference().child("Test")
+                .child("lots")
+                .child("Lb_building");
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("lotName", stringLotName);
+        updates.put("address", stringAddress);
+        updates.put("postalCode", stringPostalCode);
+        updates.put("city", stringCity);
+        //updates.put("country", "New Country");
+        updates.put("owner", stringOwner);
+        updates.put("ownerTel", stringOwnerTel);
+
+        // Update the values in Firebase
+        databaseReference.updateChildren(updates)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Handle successful update
+                        Log.d("FirebaseUpdate", "Values updated successfully");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle failed update
+                        Log.e("FirebaseUpdate", "Error updating values: " + e.getMessage());
+                    }
+                });
+
 
         return true;
     }

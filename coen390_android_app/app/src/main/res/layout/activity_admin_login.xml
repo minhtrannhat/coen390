@@ -62,6 +62,7 @@ tools:context=".Views.AdminLogin"
                 android:layout_height="wrap_content"
                 android:text="Username:"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 android:textSize="20sp"
                 tools:ignore="MissingConstraints" />
 
@@ -81,6 +82,7 @@ tools:context=".Views.AdminLogin"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Password:"
+                android:textStyle="bold"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 tools:ignore="MissingConstraints" />

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +43,37 @@ public class AdminLogin extends AppCompatActivity {
         dbHelper = new AdminFirebaseHelper();
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_admin_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_refresh) {
+            finish();
+            startActivity(getIntent());
+            return true;
+        }
+
+        if (id == R.id.action_settings) {
+
+            return true;
+        }
+
+        if (id == R.id.action_adminLogout) {
+            Intent intent = new Intent(this, AdminLogin.class);
+            startActivity(intent);
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onStart() {
         super.onStart();

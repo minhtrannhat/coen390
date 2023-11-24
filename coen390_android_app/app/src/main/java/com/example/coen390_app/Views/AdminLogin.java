@@ -1,6 +1,8 @@
 package com.example.coen390_app.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coen390_app.Controllers.AdminFirebaseHelper;
@@ -33,9 +36,11 @@ public class AdminLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
 
+
         // Initialize the button
         loginButton = findViewById(R.id.login_button);
         // Set a click listener for the button
+
         
         usernamePrompt = findViewById(R.id.username);
         passwordPrompt = findViewById(R.id.password);
@@ -72,10 +77,18 @@ public class AdminLogin extends AppCompatActivity {
                 });
             }
 
+
+
             @Override
             public void onDataError(String errorMessage) {
                 Log.e("AdminLoginScreen", "onDataError: " + errorMessage);
             }
         });
+    }
+
+
+    public void onForgotPass(){
+//        Intent intent = new Intent(AdminLogin.this, user.class);
+//        startActivity(intent);
     }
 }

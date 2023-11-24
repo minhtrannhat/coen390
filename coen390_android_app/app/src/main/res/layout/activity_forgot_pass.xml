@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff4d2"
+    tools:context=".Views.AdminLogin"
+    tools:ignore="MissingClass">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#71cd89"
+        android:padding="10dp"
+        tools:ignore="MissingConstraints" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Park N Go"
+            android:fontFamily="@font/kdamthmorproregular"
+
+            android:textColor="#0E0E0E"
+            android:textSize="40sp"
+            tools:ignore="MissingClass,MissingConstraints" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="25dp"
+            android:src="@drawable/parkngo_logo_ver2" /> <!-- to change to logo -->
+
+
+        <FrameLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:padding="10dp"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textReturn"
+                    android:layout_below="@id/login_button"
+                    android:text="Enter return email: "
+                    android:textColor="@color/white"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="5dp"
+                    />
+
+                <EditText
+                    android:id="@+id/returnEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="email"
+                    android:hint="a****@c*******.ca"
+                    android:maxLength="20"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </FrameLayout>
+        <Button
+            android:id="@+id/emailBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:text="send email"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

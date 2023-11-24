@@ -87,8 +87,8 @@ public class AdminLogin extends AppCompatActivity {
     }
 
 
-    public void onForgotPass(){
-//        Intent intent = new Intent(AdminLogin.this, user.class);
-//        startActivity(intent);
+    public void onForgotPass(View view){
+        Intent intent = new Intent(AdminLogin.this, ForgotPass.class);
+        startActivity(intent);
     }
 }

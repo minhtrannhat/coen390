@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import com.example.coen390_app.Models.ParkingLotProfile;
 import com.example.coen390_app.Models.SecondaryParkingLot;
 import com.example.coen390_app.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +33,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class UserHomescreen extends AppCompatActivity {
     private RecyclerView recyclerView;
 
-    private List<SecondaryParkingLot> parkingLotList = new ArrayList<SecondaryParkingLot>();
+    static private List<SecondaryParkingLot> parkingLotList = new ArrayList<SecondaryParkingLot>();
+
+    static private List<SecondaryParkingLot> unusedParkingLotList = new ArrayList<SecondaryParkingLot>();
+
+    private List<SecondaryParkingLot> oldParkingLotList = new ArrayList<SecondaryParkingLot>();
+    private List<SecondaryParkingLot> oldUnusedList = new ArrayList<SecondaryParkingLot>();
     private ParkingLotAdapter parkingLotAdapter;
 
     private ParkingLotProfileFirebaseHelper dbHelper;
@@ -39,20 +46,44 @@ public class UserHomescreen extends AppCompatActivity {
     private Button btnCancel, btnSave;
     private boolean isEditMode = false;
 
+    static private boolean firstLogIn = true;
+    static private boolean fromAdmin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_homescreen);
 
-        SecondaryParkingLot temp =  new SecondaryParkingLot("Joe","smith",2,"green");
 
-        for(int i =0; i <5;i++){
-            int occ = 2*i+ i;
-            if(occ > 10){occ = 5;}
-            parkingLotList.add(new SecondaryParkingLot("Building " + (i+1), "Lorem ipsum dolor sit amet",occ,"green"));
+        // extra array
+        if(firstLogIn){
+            for(int i =0; i <5;i++){
+                int occ = 2*i+ i;
+                if(occ > 10){occ = 5;}
+                if(i == 3){
+                    parkingLotList.add(new SecondaryParkingLot("Building " + (i+1), "Lorem ipsum dolor sit amet",occ,"green"));
+                }else{
+                    unusedParkingLotList.add(new SecondaryParkingLot("Building " + (i+1), "Lorem ipsum dolor sit amet",occ,"green"));
+                }
+
+            }
+            firstLogIn = false;
+        }else{
+            if(fromAdmin == false){
+                Intent intent = getIntent();
+                Bundle args = intent.getBundleExtra("BUNDLE1");
+                parkingLotList = (ArrayList<SecondaryParkingLot>) args.getSerializable("ARRAYLIST");
+                args = intent.getBundleExtra("BUNDLE2");
+                unusedParkingLotList = (ArrayList<SecondaryParkingLot>) args.getSerializable("UNUSEDARRAYLIST");
+            }
+            fromAdmin = false;
         }
 
         NotificationsUtils.checkAndRequestNotificationPermission(this);
+
+        oldParkingLotList = new ArrayList<SecondaryParkingLot>(parkingLotList);
+        oldUnusedList = new ArrayList<SecondaryParkingLot>(unusedParkingLotList);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,6 +98,8 @@ public class UserHomescreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isEditMode = !isEditMode;
+                oldParkingLotList = new ArrayList<SecondaryParkingLot>(parkingLotList);
+                oldUnusedList = new ArrayList<SecondaryParkingLot>(unusedParkingLotList);
                 toggleEditMode(isEditMode);
             }
         });
@@ -75,7 +108,10 @@ public class UserHomescreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isEditMode = !isEditMode;
+                parkingLotList = new ArrayList<SecondaryParkingLot>(oldParkingLotList);
+                unusedParkingLotList = new ArrayList<SecondaryParkingLot>(oldUnusedList);
                 toggleEditMode(isEditMode);
+                buildRecyclerView();
             }
         });
 
@@ -128,12 +164,22 @@ public class UserHomescreen extends AppCompatActivity {
         }
 
         if (id == R.id.action_adminLogin) {
+            fromAdmin = true;
             Intent intent = new Intent(this, AdminLogin.class);
             startActivity(intent);
             return true;
         }
 
         if (id == R.id.action_search) {
+            // need to clear array before switching to avoid element copies
+            Intent intent = new Intent(this, AddLocation.class);
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST",(Serializable)parkingLotList );
+            intent.putExtra("BUNDLE1",args);
+            args.putSerializable("UNUSEDARRAYLIST",(Serializable)unusedParkingLotList);
+            intent.putExtra("BUNDLE2",args);
+            startActivity(intent);
+
             // Handle the search action
             //performSearch();
             return true;
@@ -153,6 +199,8 @@ public class UserHomescreen extends AppCompatActivity {
     }
 
     private void buildRecyclerView(){
+
+
         recyclerView =findViewById(R.id.parking_lot_profile_list);
         dbHelper.getParkingLotProfiles(new ParkingLotProfileFirebaseHelper.OnDataLoadedListener() {
             @Override
@@ -189,7 +237,16 @@ public class UserHomescreen extends AppCompatActivity {
                     @Override
                     public void onItemClick(int position) {
                         // Handle item click, e.g., launch UserMapInterface activity
-                        if(position == 0){
+                        if(isEditMode){
+                            if(position == 0){
+                                Toast.makeText(UserHomescreen.this,"Unable to complete action! Try again later",Toast.LENGTH_SHORT).show();
+                            }else{
+                                unusedParkingLotList.add(parkingLotList.get(position-1));
+                                parkingLotList.remove(position-1);
+                                buildRecyclerView();
+                            }
+                        }
+                        else if(position == 0){
                             Open_UserMapInterface();
                         }else{
                             Toast.makeText(UserHomescreen.this,"Parking information is currently down",Toast.LENGTH_SHORT).show();
@@ -204,15 +261,6 @@ public class UserHomescreen extends AppCompatActivity {
 
 
                 Log.d("Userhomescreen", "onStart: Current parkingLotList size " + parkingLotProfiles.size());
-
-
-
-
-//                recyclerView2 = findViewById(R.id.parking_lot_profile_list_2);
-//
-//                secondAdapter = new SecondAdapterImpl(getApplicationContext(),parkingLotList);
-//                recyclerView2.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-//                recyclerView2.setAdapter(secondAdapter);
 
 
             }

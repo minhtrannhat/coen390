@@ -65,13 +65,16 @@ public class ParkingLotAdapter extends RecyclerView.Adapter<ParkingLotAdapter.Pa
             // Set data to views
         }
         else if(!isAdmin){
-            holder.tvName.setText(secondaryParkingLots.get(position-1).getName());
-            holder.tvOccupancy.setText(secondaryParkingLots.get(position-1).getOccupancy()+"/10");
-            holder.tvAddress.setText(secondaryParkingLots.get(position-1).getAddress());
-            if(secondaryParkingLots.get(position-1).getOccupancy()<4){
+            int location = position;
+            if(showFirst){location=position-1;}
+
+            holder.tvName.setText(secondaryParkingLots.get(location).getName());
+            holder.tvOccupancy.setText(secondaryParkingLots.get(location).getOccupancy()+"/10");
+            holder.tvAddress.setText(secondaryParkingLots.get(location).getAddress());
+            if(secondaryParkingLots.get(location).getOccupancy()<4){
                 holder.frameLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_background));
             }
-            else if(secondaryParkingLots.get(position-1).getOccupancy()<7){
+            else if(secondaryParkingLots.get(location).getOccupancy()<7){
                 holder.frameLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_background_yellow));
             }else{
                 holder.frameLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_background_red));

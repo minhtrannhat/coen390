@@ -52,6 +52,7 @@ public class UserHomescreen extends AppCompatActivity {
             parkingLotList.add(new SecondaryParkingLot("Building " + (i+1), "Lorem ipsum dolor sit amet",occ,"green"));
         }
 
+        NotificationsUtils.checkAndRequestNotificationPermission(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

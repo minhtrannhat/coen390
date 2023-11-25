@@ -33,9 +33,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class UserHomescreen extends AppCompatActivity {
     private RecyclerView recyclerView;
 
-    private List<SecondaryParkingLot> parkingLotList = new ArrayList<SecondaryParkingLot>();
+    static private List<SecondaryParkingLot> parkingLotList = new ArrayList<SecondaryParkingLot>();
 
-    private List<SecondaryParkingLot> unusedParkingLotList = new ArrayList<SecondaryParkingLot>();
+    static private List<SecondaryParkingLot> unusedParkingLotList = new ArrayList<SecondaryParkingLot>();
 
     private List<SecondaryParkingLot> oldParkingLotList = new ArrayList<SecondaryParkingLot>();
     private List<SecondaryParkingLot> oldUnusedList = new ArrayList<SecondaryParkingLot>();
@@ -47,6 +47,7 @@ public class UserHomescreen extends AppCompatActivity {
     private boolean isEditMode = false;
 
     static private boolean firstLogIn = true;
+    static private boolean fromAdmin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,16 +69,19 @@ public class UserHomescreen extends AppCompatActivity {
             }
             firstLogIn = false;
         }else{
-            Intent intent = getIntent();
-            Bundle args = intent.getBundleExtra("BUNDLE1");
-            parkingLotList = (ArrayList<SecondaryParkingLot>) args.getSerializable("ARRAYLIST");
-            args = intent.getBundleExtra("BUNDLE2");
-            unusedParkingLotList = (ArrayList<SecondaryParkingLot>) args.getSerializable("UNUSEDARRAYLIST");
-
+            if(fromAdmin == false){
+                Intent intent = getIntent();
+                Bundle args = intent.getBundleExtra("BUNDLE1");
+                parkingLotList = (ArrayList<SecondaryParkingLot>) args.getSerializable("ARRAYLIST");
+                args = intent.getBundleExtra("BUNDLE2");
+                unusedParkingLotList = (ArrayList<SecondaryParkingLot>) args.getSerializable("UNUSEDARRAYLIST");
+            }
+            fromAdmin = false;
         }
 
         oldParkingLotList = new ArrayList<SecondaryParkingLot>(parkingLotList);
         oldUnusedList = new ArrayList<SecondaryParkingLot>(unusedParkingLotList);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -158,6 +162,7 @@ public class UserHomescreen extends AppCompatActivity {
         }
 
         if (id == R.id.action_adminLogin) {
+            fromAdmin = true;
             Intent intent = new Intent(this, AdminLogin.class);
             startActivity(intent);
             return true;

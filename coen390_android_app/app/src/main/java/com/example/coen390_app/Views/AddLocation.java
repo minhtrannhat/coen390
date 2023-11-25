@@ -89,7 +89,7 @@ public class AddLocation extends AppCompatActivity {
 
 
         List<ParkingLotProfile> parkingLotProfiles = new ArrayList<ParkingLotProfile>();
-        parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,unusedParkingLotList,false,false);
+        parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,unusedParkingLotList,false);
 
         parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {
             @Override

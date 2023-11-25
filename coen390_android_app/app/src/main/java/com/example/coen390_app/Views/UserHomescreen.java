@@ -230,7 +230,7 @@ public class UserHomescreen extends AppCompatActivity {
                 dbHelper.setCurrentOccupancy(occupiedSpots.size());
 
 
-                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,parkingLotList,false,true);
+                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,parkingLotList,true);
 
                 // Set an OnClickListener on the RecyclerView items
                 parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {

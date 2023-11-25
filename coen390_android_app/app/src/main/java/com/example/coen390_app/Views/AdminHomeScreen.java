@@ -20,6 +20,7 @@ import com.example.coen390_app.Models.ParkingLotProfile;
 import com.example.coen390_app.Models.SecondaryParkingLot;
 import com.example.coen390_app.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,10 @@ public class AdminHomeScreen extends AppCompatActivity {
     private Button button;
     private ParkingLotAdapter parkingLotAdapter;
 
+    static private ArrayList<SecondaryParkingLot> adminlots = new ArrayList<SecondaryParkingLot>();
+
+    static boolean fromAddfunc = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,13 @@ public class AdminHomeScreen extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         dbHelper = new ParkingLotProfileFirebaseHelper();
+
+        if(fromAddfunc){
+            Intent intent = getIntent();
+            Bundle args = intent.getBundleExtra("BUNDLE3");
+            adminlots = (ArrayList<SecondaryParkingLot>) args.getSerializable("ARRAYLIST3");
+            fromAddfunc = false;
+        }
 
     }
 
@@ -59,6 +71,16 @@ public class AdminHomeScreen extends AppCompatActivity {
             startActivity(getIntent());
             return true;
         }
+        if(id == R.id.admin_add){
+            fromAddfunc = true;
+            Intent intent = new Intent(this, AdminAddParkingLot.class);
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST3",(Serializable)adminlots );
+            intent.putExtra("BUNDLE3",args);
+            startActivity(intent);
+            return true;
+        }
+
 
         if (id == R.id.action_settings) {
 
@@ -113,15 +135,20 @@ public class AdminHomeScreen extends AppCompatActivity {
                 dbHelper.setCurrentOccupancy(occupiedSpots.size());
 
 
-                List<SecondaryParkingLot> parkingLotList = new ArrayList<SecondaryParkingLot>();
-                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,parkingLotList,true,true);
+                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,adminlots,true);
 
                 // Set an OnClickListener on the RecyclerView items
                 parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
                         // Handle item click, e.g., launch UserMapInterface activity
-                        openFormPage();
+                        if(position == 0){
+                            openFormPage();
+                        }else{
+                            Toast.makeText(AdminHomeScreen.this,"Parking lot not connected to database",Toast.LENGTH_SHORT).show();
+
+                        }
+
                     }
                 });
 

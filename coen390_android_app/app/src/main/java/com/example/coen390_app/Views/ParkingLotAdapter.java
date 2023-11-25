@@ -29,16 +29,15 @@ public class ParkingLotAdapter extends RecyclerView.Adapter<ParkingLotAdapter.Pa
 
     private List<SecondaryParkingLot> secondaryParkingLots;
 
-    private boolean isAdmin;
+
     private boolean showFirst;
 
     private OnItemClickListener itemClickListener;
 
-    public ParkingLotAdapter(Context context, List<ParkingLotProfile> parkingLotList, List<SecondaryParkingLot> secondaryParkingLots, boolean isAdmin, boolean showFirst) {
+    public ParkingLotAdapter(Context context, List<ParkingLotProfile> parkingLotList, List<SecondaryParkingLot> secondaryParkingLots, boolean showFirst) {
         this.context = context;
         this.parkingLotList = parkingLotList;
         this.secondaryParkingLots = secondaryParkingLots;
-        this.isAdmin = isAdmin;
         this.showFirst = showFirst;
     }
 
@@ -64,14 +63,18 @@ public class ParkingLotAdapter extends RecyclerView.Adapter<ParkingLotAdapter.Pa
             holder.tvAddress.setText(parkingLot.getAddress());
             // Set data to views
         }
-        else if(!isAdmin){
+        else {
             int location = position;
             if(showFirst){location=position-1;}
 
             holder.tvName.setText(secondaryParkingLots.get(location).getName());
             holder.tvOccupancy.setText(secondaryParkingLots.get(location).getOccupancy()+"/10");
             holder.tvAddress.setText(secondaryParkingLots.get(location).getAddress());
-            if(secondaryParkingLots.get(location).getOccupancy()<4){
+            if(secondaryParkingLots.get(location).getColour().equals("purple")){
+                holder.tvOccupancy.setText("0/10");
+                holder.frameLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_background_purple));
+            }
+            else if(secondaryParkingLots.get(location).getOccupancy()<4){
                 holder.frameLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_background));
             }
             else if(secondaryParkingLots.get(location).getOccupancy()<7){

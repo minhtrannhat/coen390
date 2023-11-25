@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.coen390_app.Controllers.ParkingLotProfileFirebaseHelper;
+import com.example.coen390_app.Models.SecondaryParkingLot;
 import com.example.coen390_app.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +37,7 @@ public class AdminForm extends AppCompatActivity {
     private boolean isEditMode = false;
 
     private ParkingLotProfileFirebaseHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

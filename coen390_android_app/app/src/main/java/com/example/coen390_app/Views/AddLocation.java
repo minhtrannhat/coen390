@@ -59,8 +59,6 @@ public class AddLocation extends AppCompatActivity {
         int id = item.getItemId();
 
 
-
-
         if (id == R.id.action_search) {
             // need to clear array before switching to avoid element copies
             return true;

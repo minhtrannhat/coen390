@@ -4,7 +4,9 @@ import android.location.Address;
 
 import com.google.firebase.database.ChildEvent;
 
-public class SecondaryParkingLot {
+import java.io.Serializable;
+
+public class SecondaryParkingLot implements Serializable {
 
     public String name;
 

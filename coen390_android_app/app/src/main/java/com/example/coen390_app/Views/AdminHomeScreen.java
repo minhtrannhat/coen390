@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coen390_app.Controllers.ParkingLotProfileFirebaseHelper;
 import com.example.coen390_app.Models.ParkingLotProfile;
+import com.example.coen390_app.Models.SecondaryParkingLot;
 import com.example.coen390_app.R;
 
 import java.util.ArrayList;
@@ -111,12 +112,14 @@ public class AdminHomeScreen extends AppCompatActivity {
 
                 dbHelper.setCurrentOccupancy(occupiedSpots.size());
 
-                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles);
+
+                List<SecondaryParkingLot> parkingLotList = new ArrayList<SecondaryParkingLot>();
+                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,parkingLotList,true,true);
 
                 // Set an OnClickListener on the RecyclerView items
                 parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {
                     @Override
-                    public void onItemClick() {
+                    public void onItemClick(int position) {
                         // Handle item click, e.g., launch UserMapInterface activity
                         openFormPage();
                     }

@@ -15,9 +15,11 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.coen390_app.Controllers.ParkingLotProfileFirebaseHelper;
 import com.example.coen390_app.Models.ParkingLotProfile;
+import com.example.coen390_app.Models.SecondaryParkingLot;
 import com.example.coen390_app.R;
 
 import java.util.ArrayList;
@@ -28,6 +30,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class UserHomescreen extends AppCompatActivity {
     private RecyclerView recyclerView;
+
+    private List<SecondaryParkingLot> parkingLotList = new ArrayList<SecondaryParkingLot>();
     private ParkingLotAdapter parkingLotAdapter;
 
     private ParkingLotProfileFirebaseHelper dbHelper;
@@ -39,6 +43,15 @@ public class UserHomescreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_homescreen);
+
+        SecondaryParkingLot temp =  new SecondaryParkingLot("Joe","smith",2,"green");
+
+        for(int i =0; i <5;i++){
+            int occ = 2*i+ i;
+            if(occ > 10){occ = 5;}
+            parkingLotList.add(new SecondaryParkingLot("Building " + (i+1), "Lorem ipsum dolor sit amet",occ,"green"));
+        }
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -167,22 +180,40 @@ public class UserHomescreen extends AppCompatActivity {
 
                 dbHelper.setCurrentOccupancy(occupiedSpots.size());
 
-                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles);
+
+                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,parkingLotList,false,true);
 
                 // Set an OnClickListener on the RecyclerView items
                 parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {
                     @Override
-                    public void onItemClick() {
+                    public void onItemClick(int position) {
                         // Handle item click, e.g., launch UserMapInterface activity
-                        Open_UserMapInterface();
+                        if(position == 0){
+                            Open_UserMapInterface();
+                        }else{
+                            Toast.makeText(UserHomescreen.this,"Parking information is currently down",Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
+
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(parkingLotAdapter);
 
 
                 Log.d("Userhomescreen", "onStart: Current parkingLotList size " + parkingLotProfiles.size());
+
+
+
+
+//                recyclerView2 = findViewById(R.id.parking_lot_profile_list_2);
+//
+//                secondAdapter = new SecondAdapterImpl(getApplicationContext(),parkingLotList);
+//                recyclerView2.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//                recyclerView2.setAdapter(secondAdapter);
+
+
             }
 
             @Override

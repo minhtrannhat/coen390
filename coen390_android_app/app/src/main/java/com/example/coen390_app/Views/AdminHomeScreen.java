@@ -1,17 +1,23 @@
 package com.example.coen390_app.Views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coen390_app.Controllers.ParkingLotProfileFirebaseHelper;
 import com.example.coen390_app.Models.ParkingLotProfile;
+import com.example.coen390_app.Models.SecondaryParkingLot;
 import com.example.coen390_app.R;
 
 import java.util.ArrayList;
@@ -30,8 +36,44 @@ public class AdminHomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home_screen);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         dbHelper = new ParkingLotProfileFirebaseHelper();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_admin_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_refresh) {
+            finish();
+            startActivity(getIntent());
+            return true;
+        }
+
+        if (id == R.id.action_settings) {
+
+            return true;
+        }
+
+        if (id == R.id.action_adminLogout) {
+            Intent intent = new Intent(this, UserHomescreen.class);
+            startActivity(intent);
+            Toast.makeText(this ,"Logged out", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -70,12 +112,14 @@ public class AdminHomeScreen extends AppCompatActivity {
 
                 dbHelper.setCurrentOccupancy(occupiedSpots.size());
 
-                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles);
+
+                List<SecondaryParkingLot> parkingLotList = new ArrayList<SecondaryParkingLot>();
+                parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,parkingLotList,true,true);
 
                 // Set an OnClickListener on the RecyclerView items
                 parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {
                     @Override
-                    public void onItemClick() {
+                    public void onItemClick(int position) {
                         // Handle item click, e.g., launch UserMapInterface activity
                         openFormPage();
                     }

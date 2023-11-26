@@ -1,5 +1,7 @@
 package com.example.coen390_app.Views;
 
+
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.Toast;
 
 import com.example.coen390_app.Models.ParkingLotProfile;
@@ -27,6 +30,7 @@ public class AddLocation extends AppCompatActivity {
 
     private List<SecondaryParkingLot> parkingLotList = new ArrayList<SecondaryParkingLot>();
     private List<SecondaryParkingLot> unusedParkingLotList = new ArrayList<SecondaryParkingLot>();
+    private List<SecondaryParkingLot> searchedArray = new ArrayList<SecondaryParkingLot>();
     private ParkingLotAdapter parkingLotAdapter;
 
     @Override
@@ -40,6 +44,7 @@ public class AddLocation extends AppCompatActivity {
         args = intent.getBundleExtra("BUNDLE2");
         unusedParkingLotList = (ArrayList<SecondaryParkingLot>) args.getSerializable("UNUSEDARRAYLIST");
 
+        searchedArray = new ArrayList<SecondaryParkingLot>(unusedParkingLotList);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,6 +56,33 @@ public class AddLocation extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_add_item, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search2);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Parking lot name");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.isEmpty()){
+                    searchedArray = new ArrayList<SecondaryParkingLot>(unusedParkingLotList);
+                }
+                else{
+                    searchedArray = new ArrayList<SecondaryParkingLot>();
+                    for(int i=0;i <unusedParkingLotList.size();i++){
+                        if(unusedParkingLotList.get(i).getName().toString().toUpperCase().contains(newText.toUpperCase()) ||
+                                unusedParkingLotList.get(i).getAddress().toString().toUpperCase().contains(newText.toUpperCase())){
+                            searchedArray.add(unusedParkingLotList.get(i));
+                        }
+                    }
+                }
+                buildRecyclerView();
+                return false;
+            }
+        });
         return true;
     }
 
@@ -59,8 +91,7 @@ public class AddLocation extends AppCompatActivity {
         int id = item.getItemId();
 
 
-        if (id == R.id.action_search) {
-            // need to clear array before switching to avoid element copies
+        if (id == R.id.action_search2) {
             return true;
         }
 
@@ -87,13 +118,14 @@ public class AddLocation extends AppCompatActivity {
 
 
         List<ParkingLotProfile> parkingLotProfiles = new ArrayList<ParkingLotProfile>();
-        parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,unusedParkingLotList,false);
+        parkingLotAdapter = new ParkingLotAdapter(getApplicationContext(), parkingLotProfiles,searchedArray,false);
 
         parkingLotAdapter.setOnItemClickListener(new ParkingLotAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                parkingLotList.add(unusedParkingLotList.get(position));
-                unusedParkingLotList.remove(position);
+                parkingLotList.add(searchedArray.get(position));
+                unusedParkingLotList.remove(searchedArray.get(position));
+                searchedArray.remove(position);
                 buildRecyclerView();
 
 

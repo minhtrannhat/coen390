@@ -57,13 +57,15 @@ public class UserHomescreen extends AppCompatActivity {
 
         // extra array
         if(firstLogIn){
+
+            String addrTemp = "Lorem ipsum dolor sit amet";
             for(int i =0; i <5;i++){
                 int occ = 2*i+ i;
                 if(occ > 10){occ = 5;}
                 if(i == 3){
-                    parkingLotList.add(new SecondaryParkingLot("Building " + (i+1), "Lorem ipsum dolor sit amet",occ,"green"));
+                    parkingLotList.add(new SecondaryParkingLot("Building " + (i+1), addrTemp.substring(0,(10+i*3)),occ,"green"));
                 }else{
-                    unusedParkingLotList.add(new SecondaryParkingLot("Building " + (i+1), "Lorem ipsum dolor sit amet",occ,"green"));
+                    unusedParkingLotList.add(new SecondaryParkingLot("Building " + (i+1), addrTemp.substring(0,(10+i*3)),occ,"green"));
                 }
 
             }

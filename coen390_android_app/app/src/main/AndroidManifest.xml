@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Coen390_app"
         tools:targetApi="31">
         <activity
+            android:name=".Views.admin_settings"
+            android:exported="false" />
+        <activity
+            android:name=".Views.Connected_devices"
+            android:exported="false" />
+        <activity
             android:name=".Views.AdminAddParkingLot"
             android:exported="false" />
         <activity

@@ -83,7 +83,8 @@ public class AdminHomeScreen extends AppCompatActivity {
 
 
         if (id == R.id.action_settings) {
-
+            Intent intent = new Intent(this, admin_settings.class);
+            startActivity(intent);
             return true;
         }
 

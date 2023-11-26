@@ -42,11 +42,11 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
     public void onBindViewHolder(@NonNull DeviceViewHolder holder, int position) {
         holder.devName.setText("Device: " + parkingLotDeviceList.get(position).getName());
         if(parkingLotDeviceList.get(position).getStatus() == true){
-            holder.devStatus.setText("online");
+            holder.devStatus.setText("free");
             holder.devStatus.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_background));
         }
         else{
-            holder.devStatus.setText("offline");
+            holder.devStatus.setText("occupied");
             //holder.devStatus.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_background_red);
         }
 

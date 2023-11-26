@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -40,6 +41,10 @@ public class Connected_devices extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connected_devices);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         dbHelper = new ParkingLotProfileFirebaseHelper();
         occupancyListDbRef = dbHelper.getParkingLotProfilesDbRef()
                 .getDatabase()
@@ -58,11 +63,21 @@ public class Connected_devices extends AppCompatActivity {
         buildRecycleView();
     }
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.toolber_device_menu, menu);
+
         return true;
     }
 
+
+
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_adminLogin) {
+            buildRecycleView();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
 
     }
@@ -92,8 +107,6 @@ public class Connected_devices extends AppCompatActivity {
 
                     }
                 }
-
-
 
 
                 deviceAdapter = new DeviceAdapter(getApplicationContext(),parkingLotDevices);

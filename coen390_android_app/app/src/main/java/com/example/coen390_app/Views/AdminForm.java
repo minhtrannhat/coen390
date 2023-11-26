@@ -3,6 +3,8 @@ package com.example.coen390_app.Views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -98,20 +100,10 @@ public class AdminForm extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.form_menu, menu);
 
         //hide search, refresh and login button in menu
-        MenuItem searchButton = menu.findItem(R.id.action_search);
-        MenuItem refreshButton = menu.findItem(R.id.refresh_homescreen);
-        MenuItem loginButton = menu.findItem(R.id.action_adminLogin);
 
-        searchButton.setEnabled(false);
-        refreshButton.setEnabled(false);
-        loginButton.setEnabled(false);
-
-        searchButton.setVisible(false);
-        refreshButton.setVisible(false);
-        loginButton.setVisible(false);
 
         return true;
     }
@@ -119,8 +111,12 @@ public class AdminForm extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id== R.id.check_sensors && isEditMode == false){
+            Intent intent = new Intent(this, Connected_devices.class );
+            startActivity(intent);
+        }
 
-        if(id == R.id.action_edit){
+        if(id == R.id.form_edit){
             isEditMode = !isEditMode;
             toggleEditMode(isEditMode);
             return true;

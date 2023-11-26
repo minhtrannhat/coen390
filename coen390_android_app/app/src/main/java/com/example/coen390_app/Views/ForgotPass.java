@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class ForgotPass extends AppCompatActivity {
-    String correctEmail = "admin@concordia.ca";
+    String correctEmail = "b_debui@live.concordia.ca";
 
     Button returnEmailBtn;
     EditText inputEmail;

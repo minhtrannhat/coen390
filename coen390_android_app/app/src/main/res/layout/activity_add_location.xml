@@ -30,7 +30,7 @@
             android:text="Unmarked Parking Lots: "
             android:textColor="#0E0E0E"
             android:textSize="20sp"
-            android:fontFamily="@font/kdamthmorproregular"
+            android:fontFamily="@font/gothicblack"
             tools:ignore="MissingConstraints" />
 
 

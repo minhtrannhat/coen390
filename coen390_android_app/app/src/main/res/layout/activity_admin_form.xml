@@ -63,7 +63,8 @@
                 android:text="Address:"
                 android:textStyle="bold"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                />
 
             <EditText
                 android:id="@+id/address"

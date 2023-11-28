@@ -23,10 +23,10 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Park N Go"
-            android:fontFamily="@font/kdamthmorproregular"
+            android:fontFamily="@font/gothicblack"
 
             android:textColor="#0E0E0E"
-            android:textSize="40sp"
+            android:textSize="36sp"
             tools:ignore="MissingClass,MissingConstraints" />
     </FrameLayout>
 
@@ -41,7 +41,7 @@
         <ImageView
             android:id="@+id/logo"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:layout_margin="25dp"
             android:src="@drawable/parkngo_logo_ver2" /> <!-- to change to logo -->
 
@@ -66,7 +66,9 @@
                     android:text="Enter return email: "
                     android:textColor="@color/white"
                     android:layout_centerHorizontal="true"
+                    android:textSize="18sp"
                     android:layout_margin="5dp"
+                    android:fontFamily="@font/gothicblack"
                     />
 
                 <EditText
@@ -86,7 +88,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:text="send email"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:fontFamily="@font/gothicblack"
+            />
 
 
     </LinearLayout>

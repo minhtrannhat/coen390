@@ -16,7 +16,7 @@
             android:id="@+id/device_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kdamthmorproregular"
+            android:fontFamily="@font/gothicblack"
             android:text="NAME: A0"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -26,7 +26,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_background_red"
-            android:fontFamily="@font/kdamthmorproregular"
+            android:fontFamily="@font/gothicblack"
             android:text="offline"
             android:textAlignment="center"
             android:textColor="@color/white"

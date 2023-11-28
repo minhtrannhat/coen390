@@ -23,10 +23,10 @@ tools:context=".Views.AdminLogin"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="Park N Go"
-        android:fontFamily="@font/kdamthmorproregular"
+        android:fontFamily="@font/gothicblack"
 
         android:textColor="#0E0E0E"
-        android:textSize="40sp"
+        android:textSize="36sp"
         tools:ignore="MissingClass,MissingConstraints" />
 </FrameLayout>
 
@@ -41,7 +41,7 @@ tools:context=".Views.AdminLogin"
         <ImageView
             android:id="@+id/logo"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="85dp"
             android:layout_margin="15dp"
             android:src="@drawable/parkngo_logo_ver2" /> <!-- to change to logo -->
 
@@ -63,10 +63,12 @@ tools:context=".Views.AdminLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Username:"
-                    android:textColor="#0E0E0E"
-                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    tools:ignore="MissingConstraints" />
+                    tools:ignore="MissingConstraints"
+                    android:fontFamily="@font/gothicblack"
+                    />
 
                 <EditText
                     android:id="@+id/username"
@@ -84,10 +86,12 @@ tools:context=".Views.AdminLogin"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="Password:"
-                    android:textColor="#0E0E0E"
-                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    tools:ignore="MissingConstraints" />
+                    tools:ignore="MissingConstraints"
+                    android:fontFamily="@font/gothicblack"
+                    />
 
                 <EditText
                     android:id="@+id/password"
@@ -109,7 +113,9 @@ tools:context=".Views.AdminLogin"
             android:layout_marginTop="70dp"
             android:drawableRight="@drawable/ic_right_arrow"
             android:text="login"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:fontFamily="@font/gothicblack"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,6 +128,8 @@ tools:context=".Views.AdminLogin"
             android:layout_margin="20dp"
             android:clickable="true"
             android:onClick="onForgotPass"
+            android:fontFamily="@font/gothicblack"
+            android:textSize="14sp"
             />
 
     </LinearLayout>

@@ -53,6 +53,7 @@
                 android:hint="enter profile name"
                 android:inputType="text"
                 android:maxLength="35"
+                android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
                 android:layout_marginBottom="15dp"
                 android:textColor="#000000" />
 
@@ -73,6 +74,7 @@
                 android:hint="enter address"
                 android:inputType="text"
                 android:maxLength="35"
+                android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
                 android:layout_marginBottom="15dp"
                 android:textColor="#000000" />
 
@@ -91,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:hint="enter postal code"
                 android:inputType="text"
+                android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
                 android:maxLength="7"
                 android:layout_marginBottom="15dp"
                 android:textColor="#000000" />
@@ -109,6 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="enter city"
+                android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
                 android:inputType="text"
                 android:maxLength="35"
                 android:layout_marginBottom="15dp"
@@ -128,6 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="enter province"
+                android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
                 android:inputType="text"
                 android:maxLength="35"
                 android:layout_marginBottom="15dp"
@@ -147,6 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="enter country"
+                android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
                 android:inputType="text"
                 android:maxLength="35"
                 android:layout_marginBottom="15dp"
@@ -177,6 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="enter parking lot owner"
+                android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
                 android:inputType="text"
                 android:maxLength="35"
                 android:layout_marginBottom="15dp"
@@ -196,7 +203,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="enter telephone number"
-                android:inputType="text"
+                android:digits="1234567890"
+                android:inputType="numberDecimal"
                 android:maxLength="20"
                 android:layout_marginBottom="15dp"
                 android:textColor="#000000" />
@@ -215,7 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="enter email"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:maxLength="35"
                 android:layout_marginBottom="15dp"
                 android:textColor="#000000" />

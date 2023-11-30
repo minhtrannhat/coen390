@@ -99,7 +99,7 @@ public class Connected_devices extends AppCompatActivity {
                     // Now, you can iterate through the spotStatusMap for each floor
                     for (Map.Entry<String, Boolean> spotEntry : spotStatusMap.entrySet()) {
                         String spot = spotEntry.getKey();
-                        boolean status = spotEntry.getValue();
+                        boolean status = true;
 
                         if(parkingLotDevices.size() < 2) {
                             parkingLotDevices.add(new ParkingLotDevice(spot, status));

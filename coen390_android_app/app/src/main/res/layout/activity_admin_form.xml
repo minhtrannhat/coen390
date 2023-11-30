@@ -224,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:hint="enter email"
                 android:inputType="textEmailAddress"
-                android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                android:digits="abcdefghijklmnopqrstuvwxyz1234567890@."
                 android:maxLength="35"
                 android:layout_marginBottom="15dp"
                 android:textColor="#000000" />

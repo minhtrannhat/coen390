@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff4d2"
+    android:orientation="vertical"
+    tools:context=".Views.AdminHomeScreen">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true" />
+
+
+    <TextView
+        android:id="@+id/admin_settings_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/gothicblack"
+        android:paddingBottom="0dp"
+        android:text="Admin: "
+        android:textColor="#0E0E0E"
+        android:textSize="20sp"
+        android:drawableLeft="@drawable/baseline_person_2_24"
+        android:drawablePadding="20dp"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/admin_settings_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Email: "
+        android:textColor="#0E0E0E"
+        android:textSize="20sp"
+        android:fontFamily="@font/gothicblack"
+        android:paddingBottom="0dp"
+        android:drawableLeft="@drawable/baseline_mail_lock_24"
+        android:drawablePadding="20dp"
+        tools:ignore="MissingConstraints" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/admin_settings_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Contact telephone: "
+        android:textColor="#0E0E0E"
+        android:textSize="20sp"
+        android:fontFamily="@font/gothicblack"
+        android:paddingBottom="0dp"
+        android:drawableLeft="@drawable/baseline_phone_enabled_24"
+        android:drawablePadding="20dp"
+        tools:ignore="MissingConstraints" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/admin_settings_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Main office: "
+        android:textColor="#0E0E0E"
+        android:textSize="20sp"
+        android:fontFamily="@font/gothicblack"
+        android:paddingBottom="0dp"
+        android:drawableLeft="@drawable/baseline_place_24"
+        android:drawablePadding="20dp"
+        tools:ignore="MissingConstraints" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/admin_settings_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Security"
+        android:textColor="#0E0E0E"
+        android:textSize="20sp"
+        android:fontFamily="@font/gothicblack"
+        android:paddingBottom="0dp"
+        android:drawableLeft="@drawable/baseline_synagogue_24"
+        android:drawablePadding="20dp"
+        tools:ignore="MissingConstraints" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/admin_settings_plan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Parking lot plan"
+        android:textColor="#0E0E0E"
+        android:textSize="20sp"
+        android:fontFamily="@font/gothicblack"
+        android:paddingBottom="0dp"
+        android:drawableLeft="@drawable/baseline_payments_24"
+        android:drawablePadding="20dp"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="5dp"/>
+
+</LinearLayout>

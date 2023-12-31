@@ -1,0 +1,14 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "minhtrannhat", email = "minh@minhtrannhat.com"},
+]
+dependencies = [
+    "firebase-admin>=6.2.0",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+

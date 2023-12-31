@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/menu/toolbar_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_refresh"
+        android:title="Refresh"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/admin_add"
+        android:title="Add Parking Lot"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="About"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_adminLogout"
+        android:title="Log out"
+        app:showAsAction="never" />
+
+    <!-- add more items as needed -->
+</menu>

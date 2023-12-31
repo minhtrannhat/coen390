@@ -1,0 +1,30 @@
+{
+  "lots": {
+    "Lb_building": {
+      "name": "LB Building",
+      "address": "1400 Maisonneuve Blvd W",
+      "city": "Montreal",
+      "postal_code": "H3G 1M8",
+      "lot_owner": "Bob DeBuilder",
+      "owner_tel": "5148482424",
+      "floor_total": 1,
+      "placed_occupancy": 2,
+      "current_occupancy": 0,
+      "max_occupancy": 10,
+      "occupancy": {
+        "firstFloor": {
+          "A1": false,
+          "A2": false
+        }
+      },
+      "map_size": "small"
+    }
+  },
+  "admins": {
+    "Bob": {
+      "username": "admin",
+      "password": "123456",
+      "lots": ["1"]
+    }
+  }
+}
